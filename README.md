@@ -12,7 +12,7 @@
 
 ## Descargar e instalar
 
-El APK se publica en [Releases](https://github.com/danikdejesus1/DuoX-TV/releases). En Downloader puedes introducir el enlace directo:
+El APK se publica en [Releases](https://github.com/danikdejesus1/DuoX-TV/releases). En Downloader basta con escribir el código **9565357**, o introducir el enlace directo:
 
 `https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`
 
