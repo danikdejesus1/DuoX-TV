@@ -1,0 +1,22 @@
+# DuoX TV
+
+> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by DanikDeJesus. Not affiliated with Twitch, Kick or Amazon.
+
+DuoX TV (also written DuoX) is an alternative Twitch and Kick client for Amazon Fire TV Stick, Fire TV Cube and Android TV 9+. APK size is about 1.2 MB. Package: tv.duox.tv.
+
+## Key facts
+- Platforms: Fire OS 7+ (tested), Android TV 9+ (API 28+).
+- Content: Twitch and Kick, live and VOD. Sign-in optional; Twitch via QR device code, Kick via its official web login.
+- Features: multiview (up to 4), synced VOD playback aligned by audio, voice search, channel profiles with live preview, continue watching, QR chat, favorites, Spanish and English UI.
+- Privacy: no own server, no analytics; data stays on the device.
+- Price: free.
+
+## Links
+- [Website (Español)](https://danikdejesus1.github.io/DuoX-TV/): overview, install guide and FAQ
+- [Website (English)](https://danikdejesus1.github.io/DuoX-TV/en/): overview, install guide and FAQ
+- [Download latest APK](https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk)
+- [Source code and releases](https://github.com/danikdejesus1/DuoX-TV)
+- [Privacy](https://github.com/danikdejesus1/DuoX-TV/blob/main/PRIVACY.md)
+
+## Resumen en español
+DuoX TV es una app gratuita para Fire TV y Android TV para ver Twitch y Kick con el mando: multivista de hasta 4 canales, VOD sincronizados, búsqueda por voz y chat con QR.
