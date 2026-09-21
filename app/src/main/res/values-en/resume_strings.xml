@@ -1,0 +1,9 @@
+<resources>
+    <string name="resume_heading">Continue watching</string>
+    <string name="resume_at">Continue · %1$s</string>
+    <string name="resume_restart">Start from beginning</string>
+    <string name="resume_continue">Continue</string>
+    <string name="resume_forget">Remove</string>
+    <string name="resume_remove">Forget this VOD</string>
+    <string name="resume_unavailable">This VOD could not be opened. It may no longer be available or there may be a connection problem. Try again or visit the channel profile.</string>
+</resources>

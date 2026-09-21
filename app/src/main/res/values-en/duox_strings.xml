@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_hint">Type a channel. Live channels appear first.</string>
+    <string name="search_loading">Searching channels…</string>
+    <string name="search_none">No channels match that name.</string>
+    <string name="search_results">Channels found</string>
+    <string name="search_live">LIVE</string>
+    <string name="audio_label">Audio</string>
+    <string name="chat_label">Chat</string>
+    <string name="chat_qr_hint">Chat on your phone</string>
+    <string name="seek_back">−30 s</string>
+    <string name="seek_forward">+30 s</string>
+    <string name="search_voice">Voice</string>
+    <string name="sync_title">VODSYNC</string>
+    <string name="sync_add">Add VOD</string>
+    <string name="sync_start">Start</string>
+    <string name="sync_pick_channel">Screen %1$d</string>
+    <string name="sync_search">Search another channel…</string>
+    <string name="sync_loading">Looking for VODs…</string>
+    <string name="sync_no_vod">This channel has no public VODs available.</string>
+    <string name="sync_pick_vod">Choose the reference VOD</string>
+    <string name="sync_pick_similar">VODs suggested from “%1$s”: same day and similar title first</string>
+    <string name="sync_ready">VOD added.</string>
+    <string name="sync_same_day">Same day</string>
+    <string name="sync_similar">Similar title</string>
+    <string name="sync_adjust">Adjust</string>
+    <string name="sync_align">Align</string>
+    <string name="sync_no_match">No shared voices in the parts tried. Find a moment when they talk together and press Align, or adjust by hand.</string>
+    <string name="sync_no_time">No start time: align by voice or adjust by hand.</string>
+    <string name="sync_offset_hint">◀ ▶ adjust · OK changes step</string>
+    <string name="sync_offset_title">Manual adjust</string>
+    <string name="sync_need_two">Pick at least 2 VODs to start</string>
+    <string name="sync_vod">Synced VOD</string>
+    <string name="sync_preparing">Syncing…</string>
+    <string name="sync_cancel_hint">Back to cancel</string>
+    <string name="sync_found_at">Shared voices from %1$s</string>
+    <string name="sync_not_found_start">No shared voices found: starting from the start times. Use Align or Adjust.</string>
+    <string name="sync_pick_screen">Screen %1$d</string>
+    <string name="auth_title">Connect Twitch</string>
+    <string name="auth_scan">Scan the QR with your phone or open twitch.tv/activate and enter:</string>
+    <string name="auth_steps">Authorize the app on Twitch. Your followed channels will appear automatically.</string>
+    <string name="live_empty">No channels live right now</string>
+    <string name="live_add">Add to multiview</string>
+</resources>
