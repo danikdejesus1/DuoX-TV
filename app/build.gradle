@@ -1,0 +1,35 @@
+// DuoX TV — Creado por DanikDeJesus
+plugins { id 'com.android.application' }
+android {
+    namespace 'tv.duox.app'
+    compileSdk 35
+    buildToolsVersion "35.0.0"
+    defaultConfig {
+        applicationId 'tv.duox.tv'
+        minSdk 28
+        targetSdk 35
+        versionCode 317
+        versionName '3.0.0'
+        resourceConfigurations += ['es', 'en'] // only Spanish and English exist in the app; library translations are dropped
+        resValue 'string', 'build_date', new Date().format('yyyy-MM-dd', TimeZone.getTimeZone('UTC'))
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    sourceSets {
+        main {
+            assets.srcDirs = []
+        }
+        androidTest { java.srcDirs = [] }
+    }
+    // Compressed dex keeps the APK small; Android expands it at install time.
+    packaging { dex { useLegacyPackaging = true } }
+    buildTypes { release { minifyEnabled true; shrinkResources true; proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' } }
+}
+dependencies {
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.media3:media3-exoplayer:1.5.1'
+    implementation 'androidx.media3:media3-exoplayer-hls:1.5.1'
+    implementation 'androidx.media3:media3-ui:1.5.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.google.zxing:core:3.5.3'
+    testImplementation 'junit:junit:4.13.2'
+}
