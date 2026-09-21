@@ -6,7 +6,7 @@
 
 ![DuoX TV: multivista con cuatro directos](docs/img/multiview.jpg)
 
-**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.2 MB APK. Not affiliated with Twitch, Kick or Amazon.
+**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
 
 **Creado por DanikDeJesus.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
 

@@ -13,3 +13,7 @@ Dependencias:
 Los emotes y avatares se descargan de los servicios correspondientes durante el uso; no se distribuye un catálogo de contenido de terceros. El chat Kick utiliza https://kick.com/popout/USUARIO/chat .
 
 La implementación Java de reproducción de Twitch es propia; se consultaron los parámetros públicos empleados por Streamlink (BSD-2-Clause). No se incluye código de S0undTV ni se presenta DuoX TV como una versión oficial de ese proyecto.
+
+## Intro sound
+
+The opening sound of the released APK is licensed to the author under an Envato Elements subscription and is embedded in the app only. It is **not** included in this source repository: `app/src/main/res/raw/duox_signature.m4a` here is a silent placeholder, so the project builds but the intro is silent unless you supply your own sound with that file name.
