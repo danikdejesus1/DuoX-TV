@@ -59,7 +59,7 @@ El progreso se guarda cada 10 segundos y al salir o pausar. Los VOD vistos menos
 
 ## Compilar
 
-El código fuente completo va como archivo `DuoX-2.2.0-codigo.zip` en el [release](https://github.com/danikdejesus1/DuoX-TV/releases/latest).
+El código fuente completo va como archivo `DuoX-3.0.0-codigo.zip` en el [release](https://github.com/danikdejesus1/DuoX-TV/releases/latest).
 
 Necesitas JDK 17, Android SDK 35 y Build Tools 35.0.0. Configura `ANDROID_HOME` o un `local.properties` local con `sdk.dir`.
 
