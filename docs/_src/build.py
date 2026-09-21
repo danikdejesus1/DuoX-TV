@@ -1,0 +1,388 @@
+#!/usr/bin/env python3
+"""Generates docs/index.html (es) and docs/en/index.html (en) from one template. Run: python3 docs/_src/build.py"""
+import html, json, pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+SITE = "https://danikdejesus1.github.io/DuoX-TV/"
+REPO = "https://github.com/danikdejesus1/DuoX-TV"
+APK = REPO + "/releases/latest/download/DuoX.apk"
+
+T = {
+ "es": dict(
+  lang="es", path="", other="en/", other_label="English", home_prefix="",
+  title="DuoX TV — Twitch y Kick en Fire TV con multivista y VOD sincronizados",
+  desc="DuoX TV es una app gratuita para ver Twitch y Kick en Fire TV y Android TV: multivista de hasta 4 canales, VOD sincronizados por voz, búsqueda con voz, chat con QR y mando en mano.",
+  nav=[("#funciones", "Funciones"), ("#vodsync", "VODSYNC"), ("#instalar", "Instalar"), ("#faq", "Preguntas")],
+  get="Descargar APK", gh="Ver en GitHub",
+  eyebrow="Para Fire TV y Android TV",
+  h1="Twitch y Kick,<br><em>juntos</em> en tu tele.",
+  sub="Una app ligera y sin ruido para ver a tus streamers favoritos con el mando: hasta cuatro directos a la vez, VOD sincronizados y todo a un clic.",
+  note="Gratis · APK de 1,5 MB · Android 9 o posterior",
+  strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multivista", "VOD sincronizada", "Búsqueda por voz", "Chat con QR", "Español", "English"],
+  fh="Todo lo que echabas de menos en la tele",
+  steps=[
+   ("home", "Inicio", "Tus directos, de un vistazo", "Un panel LIVE con tus canales de Twitch y Kick ordenados por espectadores y una preview en vivo del que tengas seleccionado. Sin menús: todo con el mando.", "Inicio de DuoX TV con ibai en directo, preview y panel LIVE con tus canales"),
+   ("multiview", "Multivista", "Hasta cuatro directos a la vez", "Mezcla Twitch y Kick en la misma pantalla. Elige qué canal suena con arriba y abajo y ajusta la calidad de cada uno sin salir del reproductor.", "Multivista de DuoX TV con ibai, DjMaRiiO, Feinberg y VEGETTA777 en directo"),
+   ("vodsync", "VODSYNC", "Dos puntos de vista, un mismo momento", "Elige hasta cuatro VOD y DuoX TV analiza el audio en segundo plano para alinearlos justo donde los streamers hablan juntos. Aquí, AuronPlay y JuanSGuarnizo en el mismo instante.", "VODSYNC de DuoX TV con VOD de AuronPlay y JuanSGuarnizo sincronizados lado a lado"),
+   ("search", "Búsqueda", "Encuentra cualquier canal", "Teclado propio, búsqueda por voz y resultados reales de Twitch y Kick con los directos primero.", "Buscador de DuoX TV con resultados de Caedrel en Twitch y Kick"),
+   ("profile", "Perfiles", "Directo en vivo y todos sus VOD", "Cada canal tiene su preview del directo, los VOD con fecha y «Continuar viendo» para retomar donde lo dejaste.", "Perfil de Caedrel con preview en directo y lista de VOD"),
+   ("player", "Reproductor", "Controles mínimos, todo con el mando", "Una barra fina y translúcida con iconos. Calidad automática o manual, favoritos y chat con un QR para leerlo en el móvil.", "Reproductor de DuoX TV con ibai y la barra de controles"),
+  ],
+  stats=[("4", "canales a la vez"), ("2", "plataformas: Twitch y Kick"), ("1,5 MB", "de APK"), ("0", "servidores propios ni analítica")],
+  vs=dict(h="Mira dos streams del mismo momento, de verdad sincronizados",p="Cuando dos streamers juegan juntos, cada uno emite su propio punto de vista. VODSYNC pone los VOD lado a lado y los alinea por el audio, sin que tengas que buscar el segundo exacto.",a1="Elegir el VOD de referencia de AuronPlay en VODSYNC",c1="1 · Busca el canal y elige el VOD de referencia. Las siguientes pantallas sugieren VOD del mismo día y con título parecido.",a2="AuronPlay y JuanSGuarnizo sincronizados",c2="2 · AuronPlay y JuanSGuarnizo lado a lado, en el mismo instante (Auron 5 – Juan 9 en ambas pantallas).",steps=[("Elige canales","Hasta cuatro pantallas, de Twitch o Kick."),("Sugerencias","Primero los VOD del mismo día y título parecido."),("Alineación por voz","Analiza audio corto en segundo plano y busca dónde hablan juntos."),("Ajuste manual","Si no hay voces compartidas, mueves el desfase de cada pantalla.")]),
+  ih="Instálala en un minuto",
+  isteps=[("Instala Downloader", "Desde la Appstore de tu Fire TV, busca «Downloader» e instálalo. Actívale el permiso de «apps desconocidas»."),
+          ("Escribe el código", "Ábrelo, escribe el código 9565357 en la casilla de arriba y pulsa Ir."),
+          ("Instala y disfruta", "Acepta la instalación. Desde dentro, el icono ↻ avisa de nuevas versiones y las descarga.")],
+  copy="Copiar", copied="Copiado",
+  fq=[
+   ("¿Qué es DuoX TV?", "DuoX TV es una app gratuita para Fire TV y Android TV que permite ver directos y VOD de Twitch y Kick con el mando, con multivista de hasta cuatro canales, VOD sincronizados, búsqueda por voz y chat con código QR. Está creada por DanikDeJesus."),
+   ("¿Funciona en Amazon Fire TV Stick?", "Sí. Está pensada para Fire TV (Fire OS 7 o posterior) y funciona en Android TV 9 o posterior. Se ha probado en Fire OS 7; cuatro directos a máxima calidad pueden exceder la capacidad de un Fire TV HD, por eso la calidad se limita al usar varias pantallas."),
+   ("¿Puedo ver Twitch y Kick en la misma pantalla?", "Sí, ese es el objetivo. La multivista mezcla canales de las dos plataformas y permite elegir cuál suena."),
+   ("¿Qué es la VOD sincronizada?", "Reproduce varios VOD de streamers que hablaron juntos en el mismo momento. La app compara el audio en segundo plano para alinearlos; si no encuentra voces compartidas, empieza en la hora de inicio y puedes ajustar el desfase a mano."),
+   ("¿Necesito una cuenta?", "No para ver contenido público ni buscar canales. Para ver tus seguidos conectas Twitch escaneando un QR y Kick iniciando sesión en su página oficial. La app nunca te pide la contraseña de Twitch."),
+   ("¿Es oficial de Twitch, Kick o Amazon?", "No. DuoX TV es un cliente independiente y experimental, no afiliado a Twitch, Kick ni Amazon. Las marcas, nombres de canales e imágenes pertenecen a sus dueños."),
+   ("¿Cómo se actualiza?", "Dentro de la app, pulsa el icono ↻ junto al idioma: consulta la última versión publicada en GitHub y la descarga; el instalador de Android pide la confirmación final."),
+   ("¿Qué datos guarda?", "Todo queda en tu dispositivo: no hay servidor propio ni analítica. Los tokens de Twitch se guardan cifrados y puedes desconectar cada cuenta desde Cuentas."),
+  ],
+  cta_h="Pruébala en tu Fire TV", cta_p="Descarga el APK, instálala y dinos qué mejorarías.",
+  foot="DuoX TV es un cliente independiente y experimental, no afiliado a Twitch, Kick ni Amazon. Las marcas, los nombres de canales y las imágenes de las capturas pertenecen a sus respectivos titulares.",
+  made="Creada por DanikDeJesus", privacy="Privacidad", issues="Reportar un problema",
+  install_h_code="Enlace de descarga directa",
+  dl_code_label="Código de Downloader",dl_code_hint="Escribe solo este número en Downloader y pulsa Ir.",
+ ),
+ "en": dict(
+  lang="en", path="en/", other="../", other_label="Español", home_prefix="../",
+  title="DuoX TV — Twitch and Kick on Fire TV with multiview and synced VODs",
+  desc="DuoX TV is a free app to watch Twitch and Kick on Fire TV and Android TV: multiview of up to 4 channels, voice-synced VODs, voice search, QR chat and full remote control.",
+  nav=[("#features", "Features"), ("#vodsync", "VODSYNC"), ("#install", "Install"), ("#faq", "FAQ")],
+  get="Download APK", gh="View on GitHub",
+  eyebrow="For Fire TV and Android TV",
+  h1="Twitch and Kick,<br><em>together</em> on your TV.",
+  sub="A light, clutter-free app to watch your favorite streamers with a remote: up to four live streams at once, synced VODs, and everything one click away.",
+  note="Free · 1.5 MB APK · Android 9 or later",
+  strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multiview", "Synced VODs", "Voice search", "QR chat", "English", "Español"],
+  fh="Everything you missed on the big screen",
+  steps=[
+   ("home-en", "Home", "Your live channels at a glance", "A LIVE panel with your Twitch and Kick channels sorted by viewers and a live preview of the one you select. No menus: everything with the remote.", "DuoX TV home with ibai live, preview and a LIVE panel with your channels"),
+   ("multiview", "Multiview", "Up to four live streams at once", "Mix Twitch and Kick on the same screen. Pick which channel plays audio with up and down and set the quality of each one without leaving the player.", "DuoX TV multiview with ibai, DjMaRiiO, Feinberg and VEGETTA777 live"),
+   ("vodsync", "VODSYNC", "Two points of view, one moment", "Choose up to four VODs and DuoX TV analyzes the audio in the background to line them up right where the streamers talk together. Here, AuronPlay and JuanSGuarnizo at the same instant.", "DuoX TV VODSYNC with AuronPlay and JuanSGuarnizo VODs synced side by side"),
+   ("search", "Search", "Find any channel", "Built-in keyboard, voice search and real Twitch and Kick results with live channels first.", "DuoX TV search showing Caedrel results on Twitch and Kick"),
+   ("profile", "Profiles", "Live preview and every VOD", "Each channel has its live preview, dated VODs and “Continue watching” so you pick up where you left off.", "Caedrel profile with live preview and VOD list"),
+   ("player", "Player", "Minimal controls, all with the remote", "A thin translucent bar with icons. Auto or manual quality, favorites and a QR chat you can read on your phone.", "DuoX TV player with ibai and the control bar"),
+  ],
+  stats=[("4", "channels at once"), ("2", "platforms: Twitch and Kick"), ("1.5 MB", "APK size"), ("0", "own servers or analytics")],
+  vs=dict(h="Watch two streams of the same moment, truly in sync",p="When two streamers play together, each one broadcasts their own point of view. VODSYNC puts the VODs side by side and aligns them by audio, so you never hunt for the exact second.",a1="Choosing AuronPlay's reference VOD in VODSYNC",c1="1 · Search a channel and pick the reference VOD. The next screens suggest same-day VODs with similar titles.",a2="AuronPlay and JuanSGuarnizo synced",c2="2 · AuronPlay and JuanSGuarnizo side by side at the same instant (Auron 5 – Juan 9 on both screens).",steps=[("Pick channels","Up to four screens, from Twitch or Kick."),("Suggestions","Same-day VODs with similar titles come first."),("Voice alignment","It analyzes short audio in the background and finds where they talk together."),("Manual fine-tune","If there are no shared voices, adjust each screen's offset by hand.")]),
+  ih="Install it in a minute",
+  isteps=[("Get Downloader", "Search “Downloader” in your Fire TV Appstore and install it. Allow it to install unknown apps."),
+          ("Enter the code", "Open it, type the code 9565357 in the box at the top and press Go."),
+          ("Install and enjoy", "Accept the install. Inside the app, the ↻ icon checks for new versions and downloads them.")],
+  copy="Copy", copied="Copied",
+  fq=[
+   ("What is DuoX TV?", "DuoX TV is a free app for Fire TV and Android TV to watch Twitch and Kick live streams and VODs with a remote, featuring multiview of up to four channels, synced VODs, voice search and QR chat. It is created by DanikDeJesus."),
+   ("Does it work on Amazon Fire TV Stick?", "Yes. It is built for Fire TV (Fire OS 7 or later) and runs on Android TV 9 or later. It has been tested on Fire OS 7; four streams at top quality can exceed what an entry-level Fire TV can decode, so quality is capped when using several screens."),
+   ("Can I watch Twitch and Kick on the same screen?", "Yes, that is the point. Multiview mixes channels from both platforms and lets you choose which one plays audio."),
+   ("What are synced VODs?", "It plays several VODs of streamers who talked together at the same moment. The app compares audio in the background to align them; if it finds no shared voices it starts at the start time and you can adjust the offset by hand."),
+   ("Do I need an account?", "Not to watch public content or search channels. To see your follows you connect Twitch by scanning a QR and Kick by signing in on its official page. The app never asks for your Twitch password."),
+   ("Is it official from Twitch, Kick or Amazon?", "No. DuoX TV is an independent, experimental client, not affiliated with Twitch, Kick or Amazon. Trademarks, channel names and images belong to their owners."),
+   ("How does it update?", "Inside the app, press the ↻ icon next to the language button: it checks the latest release on GitHub and downloads it; Android’s installer asks for the final confirmation."),
+   ("What data does it store?", "Everything stays on your device: there is no own server and no analytics. Twitch tokens are stored encrypted and you can disconnect each account from Accounts."),
+  ],
+  cta_h="Try it on your Fire TV", cta_p="Download the APK, install it and tell us what you would improve.",
+  foot="DuoX TV is an independent, experimental client, not affiliated with Twitch, Kick or Amazon. Trademarks, channel names and the images in the screenshots belong to their respective owners.",
+  made="Created by DanikDeJesus", privacy="Privacy", issues="Report an issue",
+  install_h_code="Direct download link",
+  dl_code_label="Downloader code",dl_code_hint="Just type this number in Downloader and press Go.",
+ ),
+}
+
+PAGE = r'''<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<meta name="theme-color" content="#070f14">
+<script>document.documentElement.className="js"</script>
+<link rel="canonical" href="{{url}}">
+<link rel="alternate" hreflang="es" href="{{site}}">
+<link rel="alternate" hreflang="en" href="{{site}}en/">
+<link rel="alternate" hreflang="x-default" href="{{site}}">
+<link rel="icon" href="{{p}}img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="{{p}}img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DuoX TV">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:url" content="{{url}}">
+<meta property="og:image" content="{{site}}img/og.jpg">
+<meta property="og:locale" content="{{locale}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{title}}">
+<meta name="twitter:description" content="{{desc}}">
+<meta name="twitter:image" content="{{site}}img/og.jpg">
+<script type="application/ld+json">{{ld_app}}</script>
+<script type="application/ld+json">{{ld_faq}}</script>
+<style>
+:root{--bg:#070f14;--bg2:#0a141b;--panel:#0f1c24;--line:rgba(255,255,255,.08);--text:#eef5f2;--muted:#9db0aa;--mint:#a3f4cf;--mint2:#5eeab0;--kick:#53fc18;--twitch:#a970ff;--r:20px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Inter,"SF Pro Display","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{max-width:100%}
+.wrap{width:min(1180px,100% - 40px);margin:0 auto}
+.wm{font-weight:800;letter-spacing:-.03em;font-size:22px;display:inline-flex;align-items:baseline;gap:2px}.wm b{color:var(--mint2)}.wm small{font-size:.5em;font-weight:700;color:var(--muted);margin-left:3px;letter-spacing:.02em}
+nav{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(7,15,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;gap:26px;height:66px}nav .brand{display:flex;align-items:center}nav .wm{font-size:24px}
+nav .links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:var(--muted)}nav .links a:hover{color:var(--text)}
+nav .lang{font-size:14px;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:99px}nav .lang:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:650;font-size:16px;padding:14px 26px;border-radius:99px;transition:transform .25s,box-shadow .25s,background .25s;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn.p{background:var(--mint);color:#04140d;box-shadow:0 10px 40px -10px rgba(163,244,207,.55)}.btn.p:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px rgba(163,244,207,.7)}
+.btn.g{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--text)}.btn.g:hover{background:rgba(255,255,255,.08)}
+.btn.s{padding:9px 18px;font-size:14px;white-space:nowrap}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* hero */
+.hero{position:relative;padding:150px 0 40px;text-align:center;overflow:hidden}
+.hero:before{content:"";position:absolute;left:50%;top:-10%;width:1200px;height:900px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(94,234,176,.20),rgba(94,234,176,.05) 55%,transparent 75%);pointer-events:none}
+.eyebrow{display:inline-flex;gap:10px;align-items:center;font-size:14px;color:var(--mint);border:1px solid rgba(163,244,207,.25);background:rgba(163,244,207,.06);padding:7px 15px;border-radius:99px;letter-spacing:.01em}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--kick);box-shadow:0 0 12px var(--kick)}
+h1{font-size:clamp(42px,7.4vw,96px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:26px auto 22px;max-width:14ch}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--mint) 10%,var(--twitch) 55%,var(--kick) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{max-width:640px;margin:0 auto;color:var(--muted);font-size:clamp(17px,2vw,20px)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:34px 0 14px}
+.note{color:var(--muted);font-size:14px;margin:0}
+.stagewrap{perspective:1500px;margin:64px auto 0;width:min(1080px,100%)}
+.tv{position:relative;border-radius:clamp(10px,1.7vw,24px);padding:clamp(4px,.7vw,10px);background:linear-gradient(145deg,#1c2d37,#0a151c);box-shadow:0 60px 140px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.08),0 0 140px -30px rgba(163,244,207,.3)}
+.tv .screen{position:relative;aspect-ratio:16/9;border-radius:calc(clamp(10px,1.7vw,24px) - 5px);overflow:hidden;background:#000}
+.tv .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.tv:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.10),transparent 30%)}
+.duo{position:relative;width:100%;aspect-ratio:16/10;transform:rotateX(calc((1 - var(--p,0)) * 14deg)) scale(calc(.92 + var(--p,0) * .08));transform-origin:50% 100%;will-change:transform}
+.duo .tv{position:absolute}
+.duo .back{right:0;top:0;width:64%;z-index:1;opacity:.92;transform:translateY(calc((1 - var(--p,0)) * -18px));filter:saturate(.95)}
+.duo .front{left:0;bottom:0;width:76%;z-index:2;box-shadow:0 50px 120px -20px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.1),0 0 120px -30px rgba(163,244,207,.35)}
+/* strip */
+.strip{margin-top:90px;overflow:hidden;border-block:1px solid var(--line);padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.strip div{display:flex;gap:56px;width:max-content;animation:slide 38s linear infinite;color:var(--muted);font-size:15px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.strip span{display:inline-flex;align-items:center;gap:56px}.strip span:after{content:"";width:5px;height:5px;border-radius:50%;background:var(--mint2);opacity:.6}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* story */
+section{padding:120px 0}
+h2{font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.035em;font-weight:800;margin:0 0 16px}
+.sec-h{max-width:720px;margin-bottom:56px}
+.story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:70px;align-items:start}
+.steps .step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;opacity:.32;transition:opacity .5s,transform .5s;transform:translateX(-6px)}
+.steps .step.on{opacity:1;transform:none}
+.kicker{color:var(--mint);font-size:14px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.step h3{font-size:clamp(26px,3.2vw,40px);line-height:1.12;letter-spacing:-.03em;margin:0 0 14px;font-weight:750}
+.step p{margin:0;color:var(--muted);font-size:18px;max-width:46ch}
+.step .inline{display:none;margin-top:26px}
+.pin{position:sticky;top:calc(50vh - 17vw);}
+@media (min-width:1200px){.pin{top:calc(50vh - 205px)}}
+.pin .screen img{opacity:0;transform:scale(1.06);transition:opacity .7s,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.pin .screen img.on{opacity:1;transform:none}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.vs-grid figure{margin:0}.vs-grid figcaption{padding:14px 6px 2px;color:var(--muted);font-size:15px}
+.vs-steps{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}.vs-steps li{counter-increment:s;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:22px;color:var(--muted);font-size:15px}.vs-steps li:before{content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(163,244,207,.1);color:var(--mint);font-weight:800;margin-bottom:12px}.vs-steps b{display:block;color:var(--text);font-size:17px;margin-bottom:4px}
+@media (max-width:920px){.vs-grid{grid-template-columns:1fr}.vs-steps{grid-template-columns:1fr 1fr}}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.stats div{background:var(--bg2);padding:34px 24px;text-align:center}
+.stats b{display:block;font-size:clamp(34px,4.4vw,56px);letter-spacing:-.04em;line-height:1.1;background:linear-gradient(120deg,var(--mint),var(--mint2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{color:var(--muted);font-size:15px}
+/* install */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px}
+.card .n{width:38px;height:38px;border-radius:12px;background:rgba(163,244,207,.1);color:var(--mint);display:grid;place-items:center;font-weight:800;margin-bottom:18px}
+.card h3{margin:0 0 8px;font-size:21px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:16px}
+.code{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:#050c10;border:1px solid var(--line);border-radius:16px;padding:14px 14px 14px 22px}
+.code label{width:100%;font-size:13px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.code code{flex:1;min-width:0;font:500 15px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mint);overflow-wrap:anywhere}
+/* faq */
+.faq{max-width:820px}
+details{border-bottom:1px solid var(--line);padding:6px 0}summary{list-style:none;cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-.01em;padding:18px 34px 18px 0;position:relative}
+summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:26px;color:var(--mint);transition:transform .3s}details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
+details p{margin:0 0 20px;color:var(--muted);max-width:68ch}
+/* cta + footer */
+.final{text-align:center;position:relative;overflow:hidden}
+.final:before{content:"";position:absolute;left:50%;bottom:-40%;width:1000px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(169,112,255,.16),rgba(83,252,24,.05) 60%,transparent 75%);pointer-events:none}
+.final .sub{margin-bottom:8px}
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:20px 34px;align-items:center;justify-content:space-between}footer a:hover{color:var(--text)}
+footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
+/* reveal */
+.js .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}.js .reveal.in{opacity:1;transform:none}
+@media (max-width:920px){
+ nav .links{display:none}nav .lang{margin-left:auto}nav .wrap{gap:12px}nav .btn.s{padding:8px 14px;font-size:13px}h1{max-width:11ch}
+ section{padding:80px 0}.hero{padding-top:120px}
+ .story{display:block}.pin{display:none}
+ .steps .step{min-height:0;opacity:1;transform:none;margin-bottom:64px}.step .inline{display:block}
+ .stats{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}.hero .tv{transform:none}.strip div{animation:none}.steps .step{opacity:1;transform:none}.pin .screen img{transition:none}}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+ <a class="brand" href="{{home}}" aria-label="DuoX TV"><span class="wm">Duo<b>X</b><small>TV</small></span></a>
+ <div class="links">{{navlinks}}</div>
+ <a class="lang" href="{{other}}" hreflang="{{other_lang}}">{{other_label}}</a>
+ <a class="btn p s" href="{{apk}}">{{get}}</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+ <span class="eyebrow reveal"><i></i>{{eyebrow}}</span>
+ <h1 class="reveal" style="--d:.08s">{{h1}}</h1>
+ <p class="sub reveal" style="--d:.16s">{{sub}}</p>
+ <div class="cta reveal" style="--d:.24s"><a class="btn p" href="{{apk}}"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>{{get}}</a><a class="btn g" href="{{repo}}">{{gh}}</a></div>
+ <p class="note reveal" style="--d:.3s">{{note}}</p>
+ <div class="stagewrap reveal" style="--d:.36s"><div class="duo" id="herotv">
+  <div class="tv back"><div class="screen"><img src="{{p}}img/multiview.jpg" alt="{{hero_alt2}}" width="1600" height="900" decoding="async"></div></div>
+  <div class="tv front"><div class="screen"><img src="{{p}}img/{{hero_home}}.jpg" alt="{{hero_alt}}" width="1600" height="900" fetchpriority="high" decoding="async"></div></div>
+ </div></div>
+</div></header>
+
+<div class="strip" aria-hidden="true"><div>{{strip}}{{strip}}</div></div>
+
+<section id="{{fid}}"><div class="wrap">
+ <div class="sec-h reveal"><h2>{{fh}}</h2></div>
+ <div class="story">
+  <div class="steps">{{steps}}</div>
+  <div class="pin"><div class="tv"><div class="screen" id="stage">{{stage}}</div></div></div>
+ </div>
+</div></section>
+
+<section id="vodsync" style="padding-top:0"><div class="wrap">
+ <div class="sec-h reveal"><span class="kicker">VODSYNC</span><h2>{{vs_h}}</h2><p class="sub" style="margin:0;text-align:left">{{vs_p}}</p></div>
+ <div class="vs-grid">
+  <figure class="tv reveal"><div class="screen"><img src="{{p}}img/vodsync-pick.jpg" alt="{{vs_a1}}" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption>{{vs_c1}}</figcaption></figure>
+  <figure class="tv reveal" style="--d:.12s"><div class="screen"><img src="{{p}}img/vodsync.jpg" alt="{{vs_a2}}" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption>{{vs_c2}}</figcaption></figure>
+ </div>
+ <ol class="vs-steps">{{vs_steps}}</ol>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="stats reveal">{{stats}}</div></div></section>
+
+<section id="{{iid}}" style="padding-top:40px"><div class="wrap">
+ <div class="sec-h reveal"><h2>{{ih}}</h2></div>
+ <div class="cards">{{isteps}}</div>
+ <div class="code reveal"><label>{{dl_code_label}}</label><code style="font-size:34px;font-weight:800;letter-spacing:.06em">9565357</code><span style="color:var(--muted);font-size:14px">{{dl_code_hint}}</span></div>
+ <div class="code reveal"><label>{{install_h_code}}</label><code id="url">{{apk}}</code><button class="btn g s" id="copy" data-ok="{{copied}}">{{copy}}</button></div>
+</div></section>
+
+<section id="faq" style="padding-top:40px"><div class="wrap">
+ <div class="sec-h reveal"><h2>FAQ</h2></div>
+ <div class="faq">{{faq}}</div>
+</div></section>
+
+<section class="final"><div class="wrap">
+ <h2 class="reveal">{{cta_h}}</h2><p class="sub reveal" style="--d:.1s">{{cta_p}}</p>
+ <div class="cta reveal" style="--d:.2s"><a class="btn p" href="{{apk}}">{{get}}</a><a class="btn g" href="{{repo}}/issues">{{issues}}</a></div>
+</div></section>
+
+<footer><div class="wrap">
+ <div class="row"><span class="wm">Duo<b>X</b><small>TV</small></span><span>{{made}}</span><span><a href="{{repo}}">GitHub</a> · <a href="{{repo}}/blob/main/PRIVACY.md">{{privacy}}</a> · <a href="{{repo}}/releases">Releases</a></span></div>
+ <p>{{foot}}</p>
+</div></footer>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const nav=$('#nav'),tv=$('#herotv');
+if(!('IntersectionObserver' in window)){$$('.reveal').forEach(el=>el.classList.add('in'))}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -5% 0px'});
+$$('.reveal').forEach(el=>io.observe(el));
+let tick=false;
+function frame(){tick=false;const y=scrollY,p=Math.min(1,y/(innerHeight*.5));tv.style.setProperty('--p',p.toFixed(3));nav.classList.toggle('solid',y>16)}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});frame();
+const steps=$$('.step'),imgs=$$('#stage img');
+function activate(i){steps.forEach((s,k)=>s.classList.toggle('on',k===i));imgs.forEach((m,k)=>m.classList.toggle('on',k===i))}
+activate(0);
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)activate(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(s=>so.observe(s));
+const b=$('#copy');b&&b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#url').textContent);const t=b.textContent;b.textContent=b.dataset.ok;setTimeout(()=>b.textContent=t,1600)}catch(e){}});
+})();
+</script>
+</body>
+</html>
+'''
+
+def build(code):
+    d = T[code]
+    e = html.escape
+    p = d["home_prefix"]
+    url = SITE + d["path"]
+    steps, stage = [], []
+    for i, (img, kick, title, text, alt) in enumerate(d["steps"]):
+        steps.append(f'<article class="step" data-i="{i}"><div class="kicker">{e(kick)}</div><h3>{e(title)}</h3><p>{e(text)}</p>'
+                     f'<div class="tv inline"><div class="screen"><img src="{p}img/{img}.jpg" alt="{e(alt)}" width="1600" height="900" loading="lazy" decoding="async"></div></div></article>')
+        stage.append(f'<img src="{p}img/{img}.jpg" alt="{e(alt)}" width="1600" height="900" decoding="async">')
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in d["fq"])
+    ld_app = {
+        "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "DuoX TV",
+        "alternateName": ["DuoX", "DuoX TV app"], "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Fire OS 7+, Android TV 9+", "description": d["desc"], "url": url,
+        "downloadUrl": APK, "softwareVersion": "3.0.0", "image": SITE + "img/og.jpg",
+        "inLanguage": ["es", "en"], "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "author": {"@type": "Person", "name": "DanikDeJesus", "url": "https://github.com/danikdejesus1"},
+        "codeRepository": REPO,
+        "featureList": ["Multiview of up to 4 Twitch and Kick channels", "Voice-synced VODs", "Voice search", "QR chat", "In-app updates"],
+    }
+    ld_faq = {"@context": "https://schema.org", "@type": "FAQPage",
+              "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in d["fq"]]}
+    m = {
+        "lang": d["lang"], "title": e(d["title"]), "desc": e(d["desc"]), "url": url, "site": SITE, "p": p,
+        "locale": "es_ES" if code == "es" else "en_US", "ld_app": json.dumps(ld_app, ensure_ascii=False),
+        "ld_faq": json.dumps(ld_faq, ensure_ascii=False), "home": p or "./", "other": d["other"],
+        "other_lang": "en" if code == "es" else "es", "other_label": d["other_label"], "apk": APK, "repo": REPO,
+        "get": d["get"], "gh": d["gh"], "eyebrow": d["eyebrow"], "h1": d["h1"], "sub": d["sub"], "note": d["note"],
+        "navlinks": "".join(f'<a href="{h}">{e(t)}</a>' for h, t in d["nav"]),
+        "strip": "<span>" + "</span><span>".join(e(s) for s in d["strip"]) + "</span>",
+        "fid": d["nav"][0][0][1:], "iid": d["nav"][2][0][1:], "fh": d["fh"], "ih": d["ih"],
+        "steps": "".join(steps), "stage": "".join(stage),
+        "stats": "".join(f'<div><b>{e(n)}</b><span>{e(t)}</span></div>' for n, t in d["stats"]),
+        "isteps": "".join(f'<div class="card reveal" style="--d:{k*.1}s"><div class="n">{k+1}</div><h3>{e(t)}</h3><p>{e(x)}</p></div>' for k, (t, x) in enumerate(d["isteps"])),
+        "install_h_code": d["install_h_code"], "dl_code_label": d["dl_code_label"], "dl_code_hint": d["dl_code_hint"], "copy": d["copy"], "copied": d["copied"], "faq": faq,
+        "cta_h": d["cta_h"], "cta_p": d["cta_p"], "issues": d["issues"], "made": d["made"], "privacy": d["privacy"], "foot": e(d["foot"]),
+        "vs_h": d["vs"]["h"], "vs_p": d["vs"]["p"], "vs_a1": html.escape(d["vs"]["a1"]), "vs_a2": html.escape(d["vs"]["a2"]), "vs_c1": e(d["vs"]["c1"]), "vs_c2": e(d["vs"]["c2"]),
+        "vs_steps": "".join(f"<li><b>{e(t)}</b>{e(x)}</li>" for t, x in d["vs"]["steps"]),
+        "hero_alt": e(d["steps"][0][4]), "hero_alt2": e(d["steps"][1][4]), "hero_home": d["steps"][0][0],
+    }
+    out = PAGE
+    for k, v in m.items():
+        out = out.replace("{{" + k + "}}", v)
+    assert "{{" not in out, [x for x in out.split("{{")[1:3]]
+    return out
+
+(ROOT / "index.html").write_text(build("es"), encoding="utf-8")
+(ROOT / "en").mkdir(exist_ok=True)
+(ROOT / "en" / "index.html").write_text(build("en"), encoding="utf-8")
+
+(ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8")
+(ROOT / "sitemap.xml").write_text(
+    '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+    + "".join(f'<url><loc>{SITE}{p}</loc><xhtml:link rel="alternate" hreflang="es" href="{SITE}"/><xhtml:link rel="alternate" hreflang="en" href="{SITE}en/"/></url>\n' for p in ("", "en/"))
+    + "</urlset>\n", encoding="utf-8")
+(ROOT / "llms.txt").write_text(f"""# DuoX TV
+
+> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by DanikDeJesus. Not affiliated with Twitch, Kick or Amazon.
+
+DuoX TV (also written DuoX) is an alternative Twitch and Kick client for Amazon Fire TV Stick, Fire TV Cube and Android TV 9+. APK size is about 1.5 MB. Package: tv.duox.tv.
+
+## Key facts
+- Platforms: Fire OS 7+ (tested), Android TV 9+ (API 28+).
+- Content: Twitch and Kick, live and VOD. Sign-in optional; Twitch via QR device code, Kick via its official web login.
+- Features: multiview (up to 4), synced VOD playback aligned by audio, voice search, channel profiles with live preview, continue watching, QR chat, favorites, Spanish and English UI.
+- Privacy: no own server, no analytics; data stays on the device.
+- Price: free.
+
+## Links
+- [Website (Español)]({SITE}): overview, install guide and FAQ
+- [Website (English)]({SITE}en/): overview, install guide and FAQ
+- [Download latest APK]({APK})
+- [Source code and releases]({REPO})
+- [Privacy]({REPO}/blob/main/PRIVACY.md)
+
+## Resumen en español
+DuoX TV es una app gratuita para Fire TV y Android TV para ver Twitch y Kick con el mando: multivista de hasta 4 canales, VOD sincronizados, búsqueda por voz y chat con QR.
+""", encoding="utf-8")
+print("ok")
