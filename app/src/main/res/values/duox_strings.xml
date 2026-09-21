@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_hint">Escribe un canal. Aparecen primero los que están en directo.</string>
+    <string name="search_loading">Buscando canales…</string>
+    <string name="search_none">No hay canales con ese nombre.</string>
+    <string name="search_results">Canales encontrados</string>
+    <string name="search_live">EN DIRECTO</string>
+    <string name="audio_label">Audio</string>
+    <string name="chat_label">Chat</string>
+    <string name="chat_qr_hint">Chat en el móvil</string>
+    <string name="seek_back">−30 s</string>
+    <string name="seek_forward">+30 s</string>
+    <string name="search_voice">Voz</string>
+    <string name="sync_title">VODSYNC</string>
+    <string name="sync_add">Añadir VOD</string>
+    <string name="sync_start">Empezar</string>
+    <string name="sync_pick_channel">Pantalla %1$d</string>
+    <string name="sync_search">Buscar otro canal…</string>
+    <string name="sync_loading">Buscando VOD…</string>
+    <string name="sync_no_vod">Este canal no tiene VOD públicas disponibles.</string>
+    <string name="sync_pick_vod">Elige el VOD de referencia</string>
+    <string name="sync_pick_similar">VOD sugeridos según «%1$s»: mismo día y título parecido primero</string>
+    <string name="sync_ready">VOD añadido.</string>
+    <string name="sync_same_day">Mismo día</string>
+    <string name="sync_similar">Título parecido</string>
+    <string name="sync_adjust">Ajuste</string>
+    <string name="sync_align">Alinear</string>
+    <string name="sync_no_match">Sin voces compartidas en las zonas probadas. Busca un momento en que hablen juntos y pulsa Alinear, o ajusta a mano.</string>
+    <string name="sync_no_time">Sin hora de inicio: alinea por voz o ajusta a mano.</string>
+    <string name="sync_offset_hint">◀ ▶ ajustar · OK cambia el paso</string>
+    <string name="sync_offset_title">Ajuste manual</string>
+    <string name="sync_need_two">Elige al menos 2 VOD para empezar</string>
+    <string name="sync_vod">VOD sync</string>
+    <string name="sync_preparing">Sincronizando…</string>
+    <string name="sync_cancel_hint">Atrás para cancelar</string>
+    <string name="sync_found_at">Voces compartidas desde %1$s</string>
+    <string name="sync_not_found_start">No encontré voces compartidas: empiezo por la hora de inicio. Usa Alinear o Ajuste.</string>
+    <string name="sync_pick_screen">Pantalla %1$d</string>
+    <string name="auth_title">Conecta Twitch</string>
+    <string name="auth_scan">Escanea el QR con tu móvil o abre twitch.tv/activate e introduce:</string>
+    <string name="auth_steps">Autoriza la app en Twitch. Tus seguidos aparecerán automáticamente.</string>
+    <string name="live_empty">Sin canales en directo ahora mismo</string>
+    <string name="live_add">Añadir a la multivista</string>
+</resources>
