@@ -1,3 +1,13 @@
+# DuoX TV 3.0.1
+
+- **Multivista más estable en directos largos:** cada pantalla usa solo la calidad que necesita (720p con 2 canales, 480p con 3-4) y solo la pantalla con sonido decodifica audio; el reintento de conexión ya no se rinde tras 20 intentos.
+- **Panel de directos:** la burbuja junto a cada canal ahora es «+» para añadirlo a la multivista o «−» (roja) para quitarlo si ya está dentro, sin cerrar el panel.
+- **Audio en la multivista:** el aviso de que arriba/abajo cambia el canal con sonido es ahora una burbuja pequeña sobre la barra, en vez de flechas de texto.
+- **Actualizaciones:** el icono ↻ se enciende en verde si hay una versión nueva; la comprobación se hace una sola vez al abrir la app, no todo el rato.
+- **Idioma:** el botón ahora es un icono, con un menú pequeño debajo en vez de la ventana grande.
+- **Versión visible:** número pequeño en la esquina del Home.
+- **Detalle de temporada:** un aviso breve y discreto abajo del Home según la época del año (el primero, para Halloween).
+
 # DuoX TV 3.0.0
 
 - **Nueva intro:** animación minimalista («Du», «o» y la X que estalla) con sonido propio, que corre en su propio hilo para no congelarse mientras el Home se carga detrás. Dura unos 3 s y se repite en cada arranque.
