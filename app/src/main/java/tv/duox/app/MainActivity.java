@@ -29,8 +29,13 @@ public final class MainActivity extends Activity {
     final Handler main=new Handler(Looper.getMainLooper());
     final ExecutorService net=Executors.newSingleThreadExecutor(),images=Executors.newFixedThreadPool(3);
     final android.util.LruCache<String,Bitmap> cache=new android.util.LruCache<String,Bitmap>(12*1024*1024){protected int sizeOf(String k,Bitmap v){return v.getByteCount();}};
-    AppUpdater updater;
-    void updates(){if(updater!=null)updater.close();updater=new AppUpdater(this);updater.show();}
+    AppUpdater updater;boolean updateChecked;int updateAvailable;ImageView updatesIcon;Button languageButton;
+    void updates(){if(updater!=null)updater.close();updater=new AppUpdater(this);updater.show();updateAvailable=0;}
+    /** Lights up green only after the one silent check on this app launch found a newer stable release. */
+    void tintUpdateIcon(Button b){
+        Drawable[] cd=b.getCompoundDrawables();if(cd[0]==null)return;cd[0].mutate().setColorFilter(updateAvailable==1?MINT:0xff9fb5af,android.graphics.PorterDuff.Mode.SRC_IN);b.invalidate();
+    }
+
     KickSession kickLoader;FrameLayout heroVisual;
     KickChat kickChat;EmoteChat chat;android.webkit.WebView chatText;int chatVersion;
     TwitchAccount account;SharedPreferences prefs;FrameLayout root,hero;LinearLayout rail,controls;TextView status,heroTitle,heroMeta,heroName;ImageView heroImage,pause,favoriteTool;Button watch;TextView audioCaption;SearchScreen searchScreen;View chatQrBox;long followedAt;boolean homeReady,keepIntro,deferFill;volatile List<TwitchAccount.Stream> prefetchFollowed,prefetchDirectory;volatile long prefetchAt;final List<String> railOrder=new ArrayList<>();String railSignature="";
@@ -40,7 +45,7 @@ public final class MainActivity extends Activity {
     boolean profileLive;boolean previewMuted=true;Button previewAudio;
     ExoPlayer preview;PlayerView previewView;int previewVersion;String previewLogin="";boolean foreground=true;Runnable previewJob;
     final List<Pane> panes=new ArrayList<>();LinearLayout videoGrid;ImageView channelIcon;TextView channelHeading;int activePane;
-    final class Pane {String login;ExoPlayer engine;DefaultTrackSelector selector;FrameLayout box;PlayerView view;TextView label;}
+    final class Pane {String login;ExoPlayer engine;DefaultTrackSelector selector;FrameLayout box;PlayerView view;TextView label;int capW=Integer.MAX_VALUE,capH=Integer.MAX_VALUE;}
     /** Synced VOD: pane i shows the same moment as pane 0 when its position equals pane 0 position + syncOffsets[i]. */
     long[] syncOffsets=new long[0];List<String> syncIds;String syncTitle,syncThumb,syncNames;boolean synced,aligning;TextView syncNotice;int adjustStep=1000;
     FrameLayout syncOverlay;TextView syncOverlayText;BrandMotionView syncLogo;java.util.concurrent.atomic.AtomicBoolean syncCancel=new java.util.concurrent.atomic.AtomicBoolean();List<String> syncKeys,syncUrls;long[] syncStarts;
@@ -130,12 +135,34 @@ public final class MainActivity extends Activity {
         dialog.setContentView(panel);dialog.show();dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));dialog.getWindow().setDimAmount(.25f);dialog.getWindow().setLayout(dp(420),-2);if(first!=null)first.requestFocus();
     }
     void accounts(){compactSheet(getString(R.string.ui_000),new String[]{"Kick  ·  "+(KickSession.connected(this)?getString(R.string.ui_001):getString(R.string.ui_002)),"Twitch  ·  "+(account.connected()?"@"+account.name():getString(R.string.ui_002))},i->{if(i==0)kickAccount();else accountDialog();});}
-    void languages(){compactSheet(getString(R.string.ui_077),new String[]{"Español","English"},i->{prefs.edit().putString("interface_language",i==0?"es":"en").apply();recreate();});}
+    /** Only Halloween exists so far; other seasons will get their own line (and their own intro) later. Returns null outside the window. */
+    String seasonalTeaser(){
+        java.util.Calendar c=java.util.Calendar.getInstance();int month=c.get(java.util.Calendar.MONTH),day=c.get(java.util.Calendar.DAY_OF_MONTH);
+        boolean halloweenWindow=(month==java.util.Calendar.SEPTEMBER&&day>=15)||month==java.util.Calendar.OCTOBER;
+        return halloweenWindow?getString(R.string.season_halloween):null;
+    }
+    /** Small, quiet dropdown right under the language icon — not the big centered sheet used elsewhere, since there are only two choices. */
+    void languages(){
+        if(languageButton==null){compactSheet(getString(R.string.ui_077),new String[]{"Español","English"},i->{prefs.edit().putString("interface_language",i==0?"es":"en").apply();recreate();});return;}
+        LinearLayout panel=col();panel.setPadding(dp(5),dp(6),dp(5),dp(6));GradientDrawable frame=shape(0xf50e1a18,14);frame.setStroke(dp(1),0x33ffffff);panel.setBackground(frame);
+        boolean isEn="en".equals(prefs.getString("interface_language","es"));
+        Button es=softRow("Español",()->{prefs.edit().putString("interface_language","es").apply();recreate();});
+        Button en=softRow("English",()->{prefs.edit().putString("interface_language","en").apply();recreate();});
+        panel.addView(es,new LinearLayout.LayoutParams(-1,dp(36)));panel.addView(en,new LinearLayout.LayoutParams(-1,dp(36)));
+        Dialog dialog=new Dialog(this);dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);dialog.setContentView(panel);dialog.setOnDismissListener(d->scheduleHide());dialog.show();
+        Window w=dialog.getWindow();w.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));w.setDimAmount(0f);
+        int width=dp(150),screenW=getResources().getDisplayMetrics().widthPixels;int[] loc=new int[2];languageButton.getLocationOnScreen(loc);
+        w.setGravity(Gravity.TOP|Gravity.LEFT);WindowManager.LayoutParams lp=w.getAttributes();
+        lp.x=Math.max(dp(8),Math.min(loc[0]+languageButton.getWidth()/2-width/2,screenW-width-dp(8)));lp.y=loc[1]+languageButton.getHeight()+dp(8);
+        w.setAttributes(lp);w.setLayout(width,-2);(isEn?en:es).requestFocus();
+    }
     void updatePreviewAudio(){previewAudio.setText("");android.graphics.drawable.Drawable icon=getDrawable(previewMuted?R.drawable.ic_volume_off:R.drawable.ic_volume_on);icon.setBounds(0,0,dp(22),dp(22));previewAudio.setCompoundDrawables(icon,null,null,null);previewAudio.setPadding(dp(10),0,dp(10),0);previewAudio.setContentDescription(previewMuted?getString(R.string.ui_010):getString(R.string.ui_011));}
     void home(){release();browsingVods=false;vodMode=false;HomeCatalog.sortLive(streams);railOrder.clear();railSignature="";if(selected==null&&!streams.isEmpty())selected=streams.get(0);playing=false;screenVersion++;requestVersion++;root=new FrameLayout(this);root.setBackgroundColor(0xff080f12);setContentView(root);
         LinearLayout body=col();body.setPadding(dp(120),dp(18),dp(30),dp(28));root.addView(body,new FrameLayout.LayoutParams(-1,-1));
         LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);TextView brand=text("",34,WHITE);android.text.SpannableStringBuilder brandName=new android.text.SpannableStringBuilder("DuoX TV");brandName.setSpan(new android.text.style.ForegroundColorSpan(MINT),3,4,0);brandName.setSpan(new android.text.style.RelativeSizeSpan(.42f),5,7,0);brandName.setSpan(new android.text.style.ForegroundColorSpan(0x99a3b8b2),5,7,0);brand.setText(brandName);brand.setTypeface(null,Typeface.BOLD);top.addView(brand,new LinearLayout.LayoutParams(0,dp(38),1));
-        Button search=subtle(getString(R.string.ui_003),this::search);search.setCompoundDrawablesWithIntrinsicBounds(tv.duox.app.R.drawable.ic_search,0,0,0);search.setCompoundDrawablePadding(dp(8));search.setBackgroundColor(Color.TRANSPARENT);marginAdd(top,search,148,32);Button accountsButton=subtle(getString(R.string.ui_004),this::accounts);marginAdd(top,accountsButton,136,32);Button language=subtle(prefs.getString("interface_language","es").toUpperCase(Locale.ROOT),this::languages);language.setContentDescription(getString(R.string.ui_077));marginAdd(top,language,48,32);Button updates=subtle("",this::updates);updates.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_update,0,0,0);updates.setContentDescription(getString(R.string.update_title));marginAdd(top,updates,46,32);body.addView(top);
+        Button search=subtle(getString(R.string.ui_003),this::search);search.setCompoundDrawablesWithIntrinsicBounds(tv.duox.app.R.drawable.ic_search,0,0,0);search.setCompoundDrawablePadding(dp(8));search.setBackgroundColor(Color.TRANSPARENT);marginAdd(top,search,148,32);Button accountsButton=subtle(getString(R.string.ui_004),this::accounts);marginAdd(top,accountsButton,136,32);Button language=subtle("",this::languages);language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_language,0,0,0);language.setGravity(Gravity.CENTER);language.setContentDescription(getString(R.string.ui_077)+" · "+prefs.getString("interface_language","es").toUpperCase(Locale.ROOT));marginAdd(top,language,46,32);languageButton=language;Button updates=subtle("",this::updates);updates.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_update,0,0,0);updates.setContentDescription(getString(R.string.update_title));marginAdd(top,updates,46,32);tintUpdateIcon(updates);
+        if(!updateChecked){updateChecked=true;AppUpdater.peek(this,found->{updateAvailable=found?1:-1;if(playing||destroyed)return;android.view.View v=body.findViewWithTag("updatesBtn");if(v instanceof Button)tintUpdateIcon((Button)v);});}
+        updates.setTag("updatesBtn");body.addView(top);
         TextView sub=text(getString(R.string.ui_005),10,MUTED);sub.setLetterSpacing(.15f);sub.setPadding(0,dp(4),0,dp(12));body.addView(sub);
         hero=new FrameLayout(this);hero.setBackground(shape(0x5e152b29,20));hero.setClipToOutline(true);body.addView(hero,new LinearLayout.LayoutParams(-1,0,1));
         heroVisual=new FrameLayout(this);heroVisual.setBackgroundColor(Color.BLACK);hero.addView(heroVisual,new FrameLayout.LayoutParams(dp(400),-1,Gravity.RIGHT));LinearLayout content=col();content.setPadding(dp(22),dp(15),dp(18),dp(14));hero.addView(content,new FrameLayout.LayoutParams(dp(500),-1,Gravity.LEFT));
@@ -152,6 +179,19 @@ public final class MainActivity extends Activity {
         status=text("",11,MUTED);status.setPadding(0,dp(10),0,0);body.addView(status);
         LinearLayout dock=col();dock.setGravity(Gravity.CENTER_HORIZONTAL);dock.setBackground(outline(0xf219272a,28,0xff294139));dock.setElevation(dp(12));dock.setClipToOutline(true);dock.setPadding(dp(6),dp(12),dp(6),dp(10));TextView live=text("● LIVE",11,MINT);live.setGravity(Gravity.CENTER);live.setTypeface(null,Typeface.BOLD);dock.addView(live,new LinearLayout.LayoutParams(-1,dp(28)));
         ScrollView railScroll=new ScrollView(this);railScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);railScroll.setVerticalScrollBarEnabled(false);railScroll.setClipToPadding(true);rail=col();rail.setGravity(Gravity.CENTER_HORIZONTAL);rail.setPadding(dp(4),dp(8),dp(4),dp(8));railScroll.addView(rail);dock.addView(railScroll,new LinearLayout.LayoutParams(-1,0,1));FrameLayout.LayoutParams rp=new FrameLayout.LayoutParams(dp(88),-1,Gravity.LEFT);rp.setMargins(dp(18),dp(20),0,dp(20));root.addView(dock,rp);
+        // Version (bottom-right) and the seasonal teaser (bottom-center) share the same baseline as the "N canales seguidos" status line below the shelves.
+        TextView version=null;String v0=null;try{v0=getPackageManager().getPackageInfo(getPackageName(),0).versionName;}catch(Exception ignored){}
+        if(v0!=null){version=text("v"+v0,10,0x668a9d96);FrameLayout.LayoutParams vp2=new FrameLayout.LayoutParams(-2,-2,Gravity.TOP|Gravity.RIGHT);vp2.rightMargin=dp(10);root.addView(version,vp2);}
+        final TextView versionLabel=version;
+        // Seasonal teaser: a small line hinting at the themed intro coming later that month; kept in the DuoX voice (short, uppercase, letter-spaced).
+        String season=seasonalTeaser();TextView teaser=null;
+        if(season!=null){teaser=text(season,10,0x8869ffb4);teaser.setLetterSpacing(.08f);teaser.setSingleLine();FrameLayout.LayoutParams tp2=new FrameLayout.LayoutParams(-2,-2,Gravity.TOP|Gravity.CENTER_HORIZONTAL);root.addView(teaser,tp2);}
+        final TextView teaserLabel=teaser;
+        if(versionLabel!=null||teaserLabel!=null){
+            // Aligned by text baseline (not box center): the emoji in the teaser and the different font sizes have different line metrics, so centering the boxes left the text itself off by a few px.
+            Runnable alignBottom=()->{if(status.getBaseline()<0)return;int[] sv=new int[2];status.getLocationOnScreen(sv);int[] rv=new int[2];root.getLocationOnScreen(rv);float baseline=(sv[1]-rv[1])+status.getBaseline();if(versionLabel!=null&&versionLabel.getBaseline()>=0)versionLabel.setY(baseline-versionLabel.getBaseline());if(teaserLabel!=null&&teaserLabel.getBaseline()>=0)teaserLabel.setY(baseline-teaserLabel.getBaseline());};
+            status.addOnLayoutChangeListener((v,l,t,r,bo,ol,ot,orr,ob)->{if(t!=ot)alignBottom.run();});status.post(alignBottom);
+        }
         shelfSignature="";
         if(deferFill){watch.requestFocus();homeReady=true;Runnable[] steps={this::renderRail,this::renderShelves,this::renderSelection};for(int i=0;i<steps.length;i++){final Runnable step=steps[i];final boolean last=i==steps.length-1;main.postDelayed(()->{if(!destroyed&&!playing&&!browsingVods)step.run();if(last){/* creating the Kick WebView is the slowest thing on the main thread: do it now, behind the animation, not after it */warming=true;refresh();refreshDirectory();warming=false;startPreview();}if(last&&introSurface!=null)main.postDelayed(()->{if(introSurface!=null)introSurface.release();},250);},80L*(i+1));}}
         else{renderRail();renderShelves();renderSelection();watch.requestFocus();refresh();refreshDirectory();homeReady=true;}
@@ -376,6 +416,8 @@ public final class MainActivity extends Activity {
                 int index=rowIndex*columns+column;if(index>=count){row.addView(new View(this),new LinearLayout.LayoutParams(0,-1,1));continue;}
                 Pane pane=new Pane();pane.login=logins.get(index);pane.selector=new DefaultTrackSelector(this);
                 boolean together=archived&&count>1;int capW=!together?Integer.MAX_VALUE:count==2?854:640,capH=!together?Integer.MAX_VALUE:count==2?480:360;
+                // Live multiview: 2-4 decoders at full quality is what stalls the Fire TV after a long time; each pane only needs about its own share of the screen.
+                if(!archived&&count>1){capW=count==2?1280:854;capH=count==2?720:480;}pane.capW=capW;pane.capH=capH;
                 pane.selector.setParameters(pane.selector.buildUponParameters().setMaxVideoSize(capW,capH).setViewportSize(Integer.MAX_VALUE,Integer.MAX_VALUE,false));
                 pane.engine=new ExoPlayer.Builder(this).setTrackSelector(pane.selector).setLoadControl(archived?new DefaultLoadControl():new DefaultLoadControl.Builder().setBufferDurationsMs(6000,20000,1500,3000).build()).build();pane.engine.setVolume(index==0?1:0);
                 pane.box=new FrameLayout(this);pane.box.setPadding(dp(2),dp(2),dp(2),dp(2));row.addView(pane.box,new LinearLayout.LayoutParams(0,-1,1));
@@ -416,6 +458,12 @@ public final class MainActivity extends Activity {
     void audioTool(LinearLayout row,int count){
         audioCaption=null;if(count<2)return;ImageView audio=tool(row,R.drawable.ic_audio,getString(R.string.audio_label),84,this::audioPicker);audioCaption=(TextView)audio.getTag();
         audio.setOnKeyListener((v,k,e)->{if(e.getAction()!=KeyEvent.ACTION_DOWN||panes.size()<2)return false;if(k==KeyEvent.KEYCODE_DPAD_UP){selectAudio((activePane+panes.size()-1)%panes.size());return true;}if(k==KeyEvent.KEYCODE_DPAD_DOWN){selectAudio((activePane+1)%panes.size());return true;}return false;});
+        // Same glass-circle bubble as the live panel's "+", clear of the caption line above the icon and drawn in front of the bar (never behind its panel/shadow): appears only while Audio has focus, hinting up/down switches the channel in place.
+        ImageView bubble=new ImageView(this);bubble.setImageResource(R.drawable.ic_updown);bubble.setColorFilter(MINT);bubble.setPadding(dp(7),dp(7),dp(7),dp(7));
+        GradientDrawable bf=shape(0x8010201f,20);bf.setStroke(dp(1),0x4469ffb4);bubble.setBackground(bf);bubble.setAlpha(0f);bubble.setElevation(dp(24));
+        FrameLayout.LayoutParams bp2=new FrameLayout.LayoutParams(dp(32),dp(32),Gravity.TOP|Gravity.LEFT);root.addView(bubble,bp2);
+        Runnable position=()->{if(bubble.getWidth()==0)return;int[] av=new int[2];audio.getLocationOnScreen(av);int[] rv=new int[2];root.getLocationOnScreen(rv);float ax=av[0]-rv[0],ay=av[1]-rv[1];bubble.setX(ax+audio.getWidth()/2f-bubble.getWidth()/2f);bubble.setY(ay-dp(19)-dp(8)-bubble.getHeight());};
+        audio.setOnFocusChangeListener((v,f)->{if(f){bubble.post(position);bubble.animate().alpha(1f).setDuration(120).start();}else bubble.animate().alpha(0f).setDuration(120).start();scheduleHide();});
     }
     /** Icon button with a small label that appears above it while it has focus. */
     ImageView tool(LinearLayout row,int icon,String label,int width,Runnable run){
@@ -442,7 +490,7 @@ public final class MainActivity extends Activity {
             boolean active=foreground&&!paused&&e.getPlayWhenReady();
             boolean frozen=active&&(state==Player.STATE_READY||state==Player.STATE_BUFFERING&&e.getTotalBufferedDuration()>4000)&&offset!=C.TIME_UNSET&&last[0]!=C.TIME_UNSET&&offset-last[0]>0.8*(now-last[1]);
             boolean failed=active&&e.getPlayerError()!=null;
-            if((frozen||failed)&&now-last[2]>=8000&&count[1]<20){
+            if((frozen||failed)&&now-last[2]>=8000&&count[1]<1000){
                 if(failed||++count[0]>=1){count[1]++;count[0]=0;offset=C.TIME_UNSET;if(!failed&&now-last[2]>45000){last[2]=now-4000;android.util.Log.w("DuoXStall",ChannelKey.label(pane.login)+" stream stalled, jumping to the live edge");e.seekToDefaultPosition();}else{last[2]=now;reloadLive(pane,failed?"player error "+e.getPlayerError().getErrorCodeName():"still stalled");}}
             }else if(!frozen)count[0]=0;
             // Slow drift (the Fire TV playback clock running behind real time): past 20 s behind the live edge for 15 s, jump back to it.
@@ -462,9 +510,12 @@ public final class MainActivity extends Activity {
     }
     void updateVodProgress(){if(player==null||vodSeek==null)return;long duration=player.getDuration();boolean available=duration>0&&duration!=C.TIME_UNSET&&player.isCurrentMediaItemSeekable();vodSeek.setEnabled(available);if(!available){vodTime.setText(videoTime(player.getCurrentPosition())+" / —");return;}vodSeek.setMax((int)Math.min(Integer.MAX_VALUE,duration/1000));vodSeek.setKeyProgressIncrement(10);if(!scrubbing){vodSeek.setProgress((int)(player.getCurrentPosition()/1000));vodSeek.setSecondaryProgress((int)(player.getBufferedPosition()/1000));vodTime.setText(videoTime(player.getCurrentPosition())+" / "+videoTime(duration));}}
     void selectAudio(int index){if(index<0||index>=panes.size())return;closeChat();activePane=index;Pane active=panes.get(index);channel=active.login;player=active.engine;tracks=active.selector;paused=!player.getPlayWhenReady();syncPause();
-        for(int i=0;i<panes.size();i++){Pane item=panes.get(i);item.engine.setVolume(i==index?1:0);item.box.setBackgroundColor(Color.BLACK);item.label.setText(ChannelKey.label(item.login));}syncLabels();
+        for(int i=0;i<panes.size();i++){Pane item=panes.get(i);item.engine.setVolume(i==index?1:0);
+            // Live multiview: only the pane with sound decodes audio (the muted ones used to keep a whole audio pipeline running for nothing).
+            if(!vodMode&&panes.size()>1)item.selector.setParameters(item.selector.buildUponParameters().setTrackTypeDisabled(C.TRACK_TYPE_AUDIO,i!=index));
+            item.box.setBackgroundColor(Color.BLACK);item.label.setText(ChannelKey.label(item.login));}syncLabels();
         main.removeCallbacks(fadeAudio);if(panes.size()>1){Drawable ring=new ColorDrawable(MINT);active.box.setBackground(ring);active.label.setText("● AUDIO · "+ChannelKey.label(active.login));main.postDelayed(fadeAudio,3000);}
-        TwitchAccount.Stream info=streamInfo(channel);String shown=info==null?ChannelKey.slug(channel):info.name;channelHeading.setText(shown+" · "+(ChannelKey.kick(channel)?"Kick":"Twitch"));channelHeading.setTextColor(ChannelKey.color(channel));loadImage(channelIcon,info==null?"":info.avatar);channelIcon.setForeground(ring(0,ChannelKey.color(channel),1));if(audioCaption!=null)audioCaption.setText("▲ "+shown+" ▼");syncFavorite();
+        TwitchAccount.Stream info=streamInfo(channel);String shown=info==null?ChannelKey.slug(channel):info.name;channelHeading.setText(shown+" · "+(ChannelKey.kick(channel)?"Kick":"Twitch"));channelHeading.setTextColor(ChannelKey.color(channel));loadImage(channelIcon,info==null?"":info.avatar);channelIcon.setForeground(ring(0,ChannelKey.color(channel),1));if(audioCaption!=null)audioCaption.setText(shown);syncFavorite();
     }
     void audioPicker(){String[] names=new String[panes.size()];for(int i=0;i<names.length;i++)names[i]=getString(R.string.ui_061)+(i+1)+" · "+ChannelKey.label(panes.get(i).login);optionSheet(getString(R.string.ui_062),names,activePane,this::selectAudio);}
     void togglePause(){if(player==null)return;saveVodProgress();paused=!paused;for(Pane pane:panes)pane.engine.setPlayWhenReady(!paused);syncPause();scheduleHide();}
@@ -476,7 +527,7 @@ public final class MainActivity extends Activity {
         List<String> labels=new ArrayList<>();labels.add("Auto");List<Integer> shown=new ArrayList<>();
         // One line per distinct quality (the top one is the maximum): no separate "highest available" duplicate.
         for(int i:order){Format f=formats.get(i);String label=f.height+"p"+(f.frameRate>0?" · "+Math.round(f.frameRate)+" fps":"");if(labels.contains(label))continue;labels.add(label);shown.add(i);}
-        optionSheet(getString(R.string.ui_065)+ChannelKey.label(pane.login),labels.toArray(new String[0]),-1,w->{if(!panes.contains(pane))return;DefaultTrackSelector.Parameters.Builder params=pane.selector.buildUponParameters().clearOverridesOfType(C.TRACK_TYPE_VIDEO).setMaxVideoSize(Integer.MAX_VALUE,Integer.MAX_VALUE).setMaxVideoBitrate(Integer.MAX_VALUE);if(w>0)params.setOverrideForType(choices.get(shown.get(w-1)));pane.selector.setParameters(params);if(pane.engine.getPlaybackState()==Player.STATE_IDLE){pane.engine.prepare();pane.engine.play();}});
+        optionSheet(getString(R.string.ui_065)+ChannelKey.label(pane.login),labels.toArray(new String[0]),-1,w->{if(!panes.contains(pane))return;DefaultTrackSelector.Parameters.Builder params=pane.selector.buildUponParameters().clearOverridesOfType(C.TRACK_TYPE_VIDEO).setMaxVideoSize(w>0?Integer.MAX_VALUE:pane.capW,w>0?Integer.MAX_VALUE:pane.capH).setMaxVideoBitrate(Integer.MAX_VALUE);if(w>0)params.setOverrideForType(choices.get(shown.get(w-1)));pane.selector.setParameters(params);if(pane.engine.getPlaybackState()==Player.STATE_IDLE){pane.engine.prepare();pane.engine.play();}});
     }
     void closeChat(){chatVersion++;if(chatQrBox!=null&&root!=null)root.removeView(chatQrBox);chatQrBox=null;if(chatText!=null&&root!=null)root.removeView(chatText);if(chat!=null){chat.close();chat=null;}if(kickChat!=null){kickChat.close();kickChat=null;}chatText=null;}
     void toggleChat(){if(chatText!=null){closeChat();return;}if(ChannelKey.kick(channel)){kickChat=new KickChat(this,ChannelKey.slug(channel));chatText=kickChat.view;}else{TwitchAccount.Stream info=streamInfo(channel);chat=new EmoteChat(this,channel,info==null?"":info.id);chatText=chat.view;}chatText.setBackground(shape(0x800c1519,14));chatText.setClipToOutline(true);if(ChannelKey.kick(channel))chatText.setAlpha(.9f);FrameLayout.LayoutParams cp=new FrameLayout.LayoutParams(dp(310),dp(350),Gravity.TOP|Gravity.RIGHT);cp.setMargins(0,dp(20),dp(20),0);root.addView(chatText,cp);chatQr(channel);}
@@ -529,6 +580,8 @@ public final class MainActivity extends Activity {
         wrap.addView(box,new FrameLayout.LayoutParams(dp(80),n*row+dp(20),Gravity.LEFT|Gravity.CENTER_VERTICAL));
         // The + bubble sits outside the panel, with the same glass style, next to the focused channel.
         ImageView bubble=new ImageView(this);bubble.setId(View.generateViewId());bubble.setImageResource(R.drawable.ic_add);bubble.setColorFilter(MINT);bubble.setPadding(dp(7),dp(7),dp(7),dp(7));
+        // Reflects whether the focused channel is already in the multiview: + adds it (mint), - removes it (red).
+        final Runnable[] syncBubble={null};
         GradientDrawable bubbleFrame=shape(0x8010201f,20);bubbleFrame.setStroke(dp(1),frameColor);bubble.setBackground(bubbleFrame);bubble.setAlpha(0f);bubble.setFocusable(true);bubble.setClickable(true);bubble.setContentDescription(getString(R.string.live_add));
         FrameLayout.LayoutParams bp=new FrameLayout.LayoutParams(dp(32),dp(32),Gravity.LEFT|Gravity.TOP);bp.leftMargin=dp(88);wrap.addView(bubble,bp);
         List<LinearLayout> cells=new ArrayList<>();List<String> logins=new ArrayList<>();LinearLayout[] at={null};LinearLayout current=null;
@@ -536,28 +589,39 @@ public final class MainActivity extends Activity {
             LinearLayout cell=col();cell.setId(View.generateViewId());cell.setGravity(Gravity.CENTER);cell.setFocusable(true);cell.setClickable(true);cell.setContentDescription(item.name+", "+(ChannelKey.kick(item.login)?"Kick":"Twitch"));
             FrameLayout avatar=new FrameLayout(this);avatar.setPadding(dp(2),dp(2),dp(2),dp(2));avatar.setBackground(outline(PANEL,28,ChannelKey.color(item.login)));avatarInto(avatar,item,50);avatar.setAlpha(.72f);cell.addView(avatar,new LinearLayout.LayoutParams(dp(50),dp(50)));
             list.addView(cell,new LinearLayout.LayoutParams(dp(64),dp(66)));
-            cell.setOnFocusChangeListener((v,f)->{avatar.setScaleX(f?1.3f:1);avatar.setScaleY(f?1.3f:1);avatar.setAlpha(f?1f:.72f);if(f){at[0]=cell;int idx=cells.indexOf(cell);if(idx<first[0])first[0]=idx;else if(idx>=first[0]+n)first[0]=idx-n+1;final int top=first[0];scroll.post(()->{scroll.scrollTo(0,top*row);bubble.animate().translationY(box.getTop()+dp(10)+(cells.indexOf(cell)-top)*row+(row-dp(32))/2f).alpha(1f).setDuration(120).start();});}armLivePanelHide();});
+            cell.setOnFocusChangeListener((v,f)->{avatar.setScaleX(f?1.3f:1);avatar.setScaleY(f?1.3f:1);avatar.setAlpha(f?1f:.72f);if(f){at[0]=cell;int idx=cells.indexOf(cell);if(idx<first[0])first[0]=idx;else if(idx>=first[0]+n)first[0]=idx-n+1;final int top=first[0];scroll.post(()->{scroll.scrollTo(0,top*row);bubble.animate().translationY(box.getTop()+dp(10)+(cells.indexOf(cell)-top)*row+(row-dp(32))/2f).alpha(1f).setDuration(120).start();});if(syncBubble[0]!=null)syncBubble[0].run();}armLivePanelHide();});
             cell.setNextFocusRightId(bubble.getId());cell.setNextFocusLeftId(cell.getId());
             cell.setOnClickListener(v->{closeLivePanel();if(panes.size()==1&&panes.get(0).login.equals(item.login))return;openChannel(item.login);});
             cells.add(cell);logins.add(item.login);if(item.login.equals(channel))current=cell;
         }
         for(int i=0;i<cells.size();i++){cells.get(i).setNextFocusUpId(cells.get(Math.max(0,i-1)).getId());cells.get(i).setNextFocusDownId(cells.get(Math.min(cells.size()-1,i+1)).getId());}
-        bubble.setOnFocusChangeListener((v,f)->{bubble.setScaleX(f?1.1f:1);bubble.setScaleY(f?1.1f:1);GradientDrawable g=shape(0x8010201f,20);g.setStroke(dp(f?2:1),f?MINT:frameColor);bubble.setBackground(g);armLivePanelHide();});
+        bubble.setOnFocusChangeListener((v,f)->{bubble.setScaleX(f?1.1f:1);bubble.setScaleY(f?1.1f:1);boolean inMulti=inMulti(cells.indexOf(at[0])>=0?logins.get(cells.indexOf(at[0])):"");int strokeColor=inMulti?0xffff5c5c:frameColor;GradientDrawable g=shape(0x8010201f,20);g.setStroke(dp(f?2:1),f?(inMulti?0xffff5c5c:MINT):strokeColor);bubble.setBackground(g);armLivePanelHide();});
+        syncBubble[0]=()->{int i=cells.indexOf(at[0]);boolean inMulti=i>=0&&inMulti(logins.get(i));bubble.setImageResource(inMulti?R.drawable.ic_remove:R.drawable.ic_add);bubble.setColorFilter(inMulti?0xffff5c5c:MINT);GradientDrawable g=shape(0x8010201f,20);g.setStroke(dp(bubble.isFocused()?2:1),inMulti?0xffff5c5c:(bubble.isFocused()?MINT:frameColor));bubble.setBackground(g);bubble.setContentDescription(getString(inMulti?R.string.live_remove:R.string.live_add));};
         bubble.setOnKeyListener((v,k,ev)->{if(ev.getAction()!=KeyEvent.ACTION_DOWN)return false;int i=Math.max(0,cells.indexOf(at[0]));if(k==KeyEvent.KEYCODE_DPAD_LEFT){cells.get(i).requestFocus();return true;}if(k==KeyEvent.KEYCODE_DPAD_UP||k==KeyEvent.KEYCODE_DPAD_DOWN){cells.get(Math.max(0,Math.min(cells.size()-1,i+(k==KeyEvent.KEYCODE_DPAD_UP?-1:1)))).requestFocus();return true;}return k==KeyEvent.KEYCODE_DPAD_RIGHT;});
-        bubble.setOnClickListener(v->{int i=cells.indexOf(at[0]);if(i>=0)addToMulti(logins.get(i));});
+        bubble.setOnClickListener(v->{int i=cells.indexOf(at[0]);if(i<0)return;String login=logins.get(i);if(inMulti(login))removeFromMulti(login);else addToMulti(login);syncBubble[0].run();});
         FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(dp(132),-1,Gravity.LEFT);lp.leftMargin=dp(16);
         livePanel=wrap;wrap.setAlpha(0f);root.addView(wrap,lp);wrap.animate().alpha(1f).setDuration(140).start();
-        final LinearLayout start=current!=null?current:cells.get(0);livePanelEnter=()->{for(LinearLayout c:cells)c.setFocusable(true);bubble.setFocusable(true);start.requestFocus();};if(focus)start.requestFocus();else{for(LinearLayout c:cells)c.setFocusable(false);bubble.setFocusable(false);first[0]=Math.max(0,Math.min(cells.indexOf(start),cells.size()-n));scroll.post(()->scroll.scrollTo(0,first[0]*row));}armLivePanelHide();syncLabels();
+        if(syncBubble[0]!=null)syncBubble[0].run();final LinearLayout start=current!=null?current:cells.get(0);livePanelEnter=()->{for(LinearLayout c:cells)c.setFocusable(true);bubble.setFocusable(true);start.requestFocus();};if(focus)start.requestFocus();else{for(LinearLayout c:cells)c.setFocusable(false);bubble.setFocusable(false);first[0]=Math.max(0,Math.min(cells.indexOf(start),cells.size()-n));scroll.post(()->scroll.scrollTo(0,first[0]*row));}armLivePanelHide();syncLabels();
     }
     void armLivePanelHide(){main.removeCallbacks(livePanelHide);if(livePanel!=null)main.postDelayed(livePanelHide,5000);}
     void closeLivePanel(){main.removeCallbacks(livePanelHide);boolean had=livePanel!=null&&livePanel.findFocus()!=null;if(livePanel!=null&&root!=null)root.removeView(livePanel);livePanel=null;livePanelEnter=null;if(had&&pause!=null)pause.requestFocus();syncLabels();scheduleHide();}
+    boolean inMulti(String login){for(Pane pane:panes)if(pane.login.equals(login))return true;return false;}
     /** Adds a live channel to the streams already playing (max 4) by restarting the multiview with fresh URLs. */
     void addToMulti(String login){
         if(panes.size()>=4){Toast.makeText(this,getString(R.string.ui_074),Toast.LENGTH_SHORT).show();return;}
-        for(Pane pane:panes)if(pane.login.equals(login)){closeLivePanel();return;}
-        closeLivePanel();List<String> picked=new ArrayList<>();for(Pane pane:panes)picked.add(pane.login);picked.add(login);
-        int request=++requestVersion;
-        net.execute(()->{try{List<String> urls=new ArrayList<>();for(String key:picked)urls.add(resolveStream(key));main.post(()->{if(!destroyed&&foreground&&request==requestVersion){skipEntryPanel=true;startMulti(picked,urls);}});}catch(Exception e){main.post(()->{if(!destroyed&&request==requestVersion)error(getString(R.string.ui_076));});}});
+        if(inMulti(login))return;
+        List<String> picked=new ArrayList<>();for(Pane pane:panes)picked.add(pane.login);picked.add(login);
+        restartMultiWith(picked);
+    }
+    /** Drops a channel from the multiview, keeping the others playing (min 1 left). */
+    void removeFromMulti(String login){
+        if(panes.size()<=1||!inMulti(login))return;
+        List<String> picked=new ArrayList<>();for(Pane pane:panes)if(!pane.login.equals(login))picked.add(pane.login);
+        restartMultiWith(picked);
+    }
+    void restartMultiWith(List<String> picked){
+        boolean keepPanel=livePanel!=null;int request=++requestVersion;
+        net.execute(()->{try{List<String> urls=new ArrayList<>();for(String key:picked)urls.add(resolveStream(key));main.post(()->{if(!destroyed&&foreground&&request==requestVersion){skipEntryPanel=true;startMulti(picked,urls);if(keepPanel)openLivePanel(false);}});}catch(Exception e){main.post(()->{if(!destroyed&&request==requestVersion)error(getString(R.string.ui_076));});}});
     }
     // ---- Synced VOD -------------------------------------------------------------------------------------------------
     /** Keeps the panes together: small drift is corrected by nudging speed, large drift by seeking. */
