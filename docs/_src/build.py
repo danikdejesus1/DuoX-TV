@@ -264,7 +264,7 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 <section id="{{iid}}" style="padding-top:40px"><div class="wrap">
  <div class="sec-h reveal"><h2>{{ih}}</h2></div>
  <div class="cards">{{isteps}}</div>
- <div class="code reveal"><label>{{dl_code_label}}</label><code style="font-size:34px;font-weight:800;letter-spacing:.06em">9565357</code><span style="color:var(--muted);font-size:14px">{{dl_code_hint}}</span></div>
+ <div class="code reveal"><label>{{dl_code_label}}</label><code style="display:block;width:100%;flex:none;overflow-wrap:normal;font-size:34px;font-weight:800;letter-spacing:.06em">9565357</code><span style="display:block;width:100%;color:var(--muted);font-size:14px">{{dl_code_hint}}</span></div>
  <div class="code reveal"><label>{{install_h_code}}</label><code id="url">{{apk}}</code><button class="btn g s" id="copy" data-ok="{{copied}}">{{copy}}</button></div>
 </div></section>
 
