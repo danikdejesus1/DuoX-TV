@@ -41,4 +41,6 @@
     <string name="auth_steps">Autoriza la app en Twitch. Tus seguidos aparecerán automáticamente.</string>
     <string name="live_empty">Sin canales en directo ahora mismo</string>
     <string name="live_add">Añadir a la multivista</string>
+    <string name="live_remove">Quitar de la multivista</string>
+    <string name="season_halloween">🎃 Halloween se acerca a DuoX</string>
 </resources>
