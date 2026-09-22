@@ -320,7 +320,7 @@ def build(code):
         "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "DuoX TV",
         "alternateName": ["DuoX", "DuoX TV app"], "applicationCategory": "EntertainmentApplication",
         "operatingSystem": "Fire OS 7+, Android TV 9+", "description": d["desc"], "url": url,
-        "downloadUrl": APK, "softwareVersion": "3.0.0", "image": SITE + "img/og.jpg",
+        "downloadUrl": APK, "softwareVersion": "3.0.1", "image": SITE + "img/og.jpg",
         "inLanguage": ["es", "en"], "isAccessibleForFree": True,
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
         "author": {"@type": "Person", "name": "DanikDeJesus", "url": "https://github.com/danikdejesus1"},
