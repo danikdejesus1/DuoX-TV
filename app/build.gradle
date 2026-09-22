@@ -8,8 +8,8 @@ android {
         applicationId 'tv.duox.tv'
         minSdk 28
         targetSdk 35
-        versionCode 317
-        versionName '3.0.0'
+        versionCode 318
+        versionName '3.0.1'
         resourceConfigurations += ['es', 'en'] // only Spanish and English exist in the app; library translations are dropped
         resValue 'string', 'build_date', new Date().format('yyyy-MM-dd', TimeZone.getTimeZone('UTC'))
     }
