@@ -41,4 +41,6 @@
     <string name="auth_steps">Authorize the app on Twitch. Your followed channels will appear automatically.</string>
     <string name="live_empty">No channels live right now</string>
     <string name="live_add">Add to multiview</string>
+    <string name="live_remove">Remove from multiview</string>
+    <string name="season_halloween">🎃 Halloween is coming to DuoX</string>
 </resources>
