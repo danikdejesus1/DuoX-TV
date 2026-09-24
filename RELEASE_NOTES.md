@@ -1,3 +1,45 @@
+# DuoX TV 3.2.0 — Conecta Kick por QR
+
+**Escanea, confirma y disfruta de tus seguidos.** La gran novedad de DuoX TV 3.2.0 es la conexión de Kick desde el móvil: se elimina el formulario web de inicio de sesión en el televisor.
+
+## Kick, ahora mucho más fácil
+
+1. Abre el botón de perfiles del Home y elige Kick.
+2. Escanea el QR con el móvil, donde debes tener tu sesión de Kick iniciada.
+3. Confirma el código de seis dígitos. DuoX vuelve al Home y carga tus seguidos automáticamente.
+
+Sin escribir tu contraseña con el mando, sin navegador de inicio de sesión en la TV y sin botón de sincronización manual. Tus canales de Kick se reúnen con los de Twitch en DuoX, también para la multivista.
+
+**Si actualizas desde 3.1.0 o una versión anterior:** conecta Kick una vez mediante el nuevo QR. La sesión web antigua no se convierte automáticamente; no necesitas desinstalar ni borrar los datos de la app. Los favoritos y el progreso local de VOD se conservan.
+
+## Más mejoras
+
+- **Panel LIVE al día:** actualiza los seguidos de Twitch y Kick cada 45 segundos mientras ves un directo. Añade quienes empiezan, retira quienes terminan y conserva la selección al refrescar. Un fallo de una plataforma no borra la lista de la otra.
+- **Home renovado:** bienvenida centrada con «Conectar cuentas», lema más discreto y perfiles verdes o violetas según la cuenta conectada; blancos cuando está desconectada.
+- **Cabecera más cuidada:** iconos centrados, alineados y de tamaño uniforme.
+- **Todo sobre DuoX en un sitio:** notas del parche, aviso legal y términos desde el botón de información, en español e inglés.
+- Se conservan la multivista de hasta cuatro canales, los perfiles con VOD, Continuar viendo, VOD sincronizados y chat con emotes.
+
+## Instalar o actualizar
+
+- Si ya usas DuoX TV, pulsa **↻ Actualización** o instala `DuoX.apk` encima de tu versión actual.
+- En Downloader: **9565357** o `https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`.
+- Fire OS 7 / Android TV 9 o posterior. APK firmado con el mismo certificado que las versiones anteriores.
+
+La vinculación y la carga de seguidos de Kick se han comprobado en un Fire TV real. DuoX TV es independiente, no oficial ni afiliada a Twitch, Kick o Amazon; la compatibilidad con los servicios puede cambiar.
+
+# DuoX TV 3.1.0
+
+- **Emotes de Twitch:** ya cargan (antes fallaba por faltar el permiso `user:read:emotes`); reconecta tu cuenta de Twitch para que aparezcan.
+- **Perfil del canal rediseñado:** el recuadro de en vivo es un botón fijo a la derecha con su estado y datos debajo, más grande y flotante; a la izquierda, Continuar viendo junto con la rejilla de vídeos, aprovechando toda la pantalla.
+- **Reproductor de VOD:** la línea de tiempo es más fina, con el tiempo al lado en vez de una burbuja gruesa; mantener pulsado izquierda o derecha acelera el salto (x2, x4, x8, x16).
+- **Multivista:** el marco de selección sigue el video real sin recortar los bordes; distribuciones en cuadrícula, principal arriba o principal al lado; marca de agua discreta cuando sobra espacio; la navegación entre menú y videos ya no se mezcla; un video vertical en modo lateral ahora usa toda la altura del panel en vez de verse diminuto.
+- **Menú inferior del reproductor:** Chat al final, Emotes aparece como una burbuja junto a Chat en vez de icono propio, sin botón Inicio (Atrás ya lleva ahí), y las etiquetas ya no cortan nombres largos.
+- **Chat:** si lo tienes abierto, Atrás ya no te saca del directo — lo cierra y muestra el menú.
+- **Menú de Cuentas:** ahora es un menú pequeño bajo el botón, igual que el de idioma, en vez de la ventana grande.
+- **Teclado de búsqueda:** la tecla Ir se integró al teclado con la forma clásica de Enter; el campo de texto muestra un cursor parpadeante mientras escribes.
+- **Selector de distribución de multivista** más pequeño y discreto.
+
 # DuoX TV 3.0.1
 
 - **Multivista más estable en directos largos:** cada pantalla usa solo la calidad que necesita (720p con 2 canales, 480p con 3-4) y solo la pantalla con sonido decodifica audio; el reintento de conexión ya no se rinde tras 20 intentos.

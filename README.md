@@ -6,7 +6,13 @@
 
 ![DuoX TV: multivista con cuatro directos](docs/img/multiview.jpg)
 
-**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
+## Nuevo en 3.2.0: conecta Kick por QR
+
+**Escanea en el móvil, confirma el código de seis dígitos y tus seguidos aparecen solos.** Sin escribir la contraseña con el mando ni cargar un formulario web en el televisor. Abre los perfiles del Home → Kick para empezar. Si vienes del acceso web de 3.1.0, vuelve a vincular Kick una vez; no hace falta desinstalar.
+
+[Ver todas las novedades de 3.2.0](https://github.com/danikdejesus1/DuoX-TV/releases/tag/v3.2.0)
+
+**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.0 adds Kick QR sign-in from your phone with automatic followed-channel loading. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
 
 **Creado por DanikDeJesus.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
 
@@ -16,7 +22,7 @@ El APK se publica en [Releases](https://github.com/danikdejesus1/DuoX-TV/release
 
 `https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`
 
-Activa el permiso de instalación de aplicaciones desconocidas para Downloader, descarga el APK e instálalo. No necesitas un código numérico; este requiere crear un enlace corto aparte.
+Activa el permiso de instalación de aplicaciones desconocidas para Downloader, descarga el APK e instálalo.
 
 Requiere Android 9/API 28 o posterior; se ha probado en Fire OS 7. Las actualizaciones publicadas deben conservar el identificador y certificado de firma de DuoX TV.
 
@@ -41,8 +47,8 @@ El icono ↻ junto al idioma consulta nuevas versiones en GitHub y permite desca
 - Perfiles con preview en vivo destacado, control de sonido y VOD fechados; acceso desde el buscador y desde el reproductor.
 - Interfaz español/inglés, control de sonido del preview y avisos breves cuando un favorito entra en directo.
 - HOME más oscuro, sin rebote al llegar al límite de desplazamiento, e introducción animada breve.
-- Chat de Twitch con emotes; chat de Kick de lectura mediante su popout oficial.
-- Conexión de cuentas, sin pedir contraseñas de Twitch dentro de la app.
+- Chat de Twitch y Kick con emotes; la lectura conecta directamente con sus servicios.
+- Conexión de Twitch y Kick por QR desde el móvil, sin escribir contraseñas con el mando.
 - Sin servicio de traducción ni suscripción propia.
 
 ## Probar y reportar problemas
@@ -59,7 +65,7 @@ El progreso se guarda cada 10 segundos y al salir o pausar. Los VOD vistos menos
 
 ## Compilar
 
-El código fuente completo va como archivo `DuoX-3.0.0-codigo.zip` en el [release](https://github.com/danikdejesus1/DuoX-TV/releases/latest).
+El código fuente completo va como archivo `DuoX-3.2.0-codigo.zip` en el [release](https://github.com/danikdejesus1/DuoX-TV/releases/latest).
 
 Necesitas JDK 17, Android SDK 35 y Build Tools 35.0.0. Configura `ANDROID_HOME` o un `local.properties` local con `sdk.dir`.
 
@@ -79,7 +85,7 @@ La salida release está recortada con R8 (código y recursos sin uso eliminados,
 
 Esta app no es oficial ni está afiliada a Twitch, Kick o Amazon. La reproducción y parte de la integración de Kick dependen de interfaces del sitio que pueden cambiar. Los servicios conservan sus condiciones y restricciones; DuoX TV no garantiza acceso a vídeos privados ni eliminación de anuncios de las plataformas. Los términos de Kick para desarrolladores indican el uso de su reproductor insertado: https://dev.kick.com/terms-of-service . La integración nativa actual es experimental.
 
-Cuatro directos a máxima calidad pueden exceder la memoria o capacidad de decodificación del Fire TV HD. El chat de Kick es de lectura; no implementa envío con mando. No hay subtítulos traducidos por IA en esta versión. La compatibilidad no está certificada para todos los dispositivos.
+Cuatro directos a máxima calidad pueden exceder la memoria o capacidad de decodificación del Fire TV HD. No hay subtítulos traducidos por IA en esta versión. La compatibilidad no está certificada para todos los dispositivos.
 
 ## Privacidad y autoría
 
