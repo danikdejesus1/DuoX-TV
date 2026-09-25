@@ -92,6 +92,8 @@ h2{font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.035em;font
 .stats span{color:var(--muted);font-size:15px}
 /* install */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards.devices{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.cards.devices{grid-template-columns:1fr}}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px}
 .card .n{width:38px;height:38px;border-radius:12px;background:rgba(163,244,207,.1);color:var(--mint);display:grid;place-items:center;font-weight:800;margin-bottom:18px}
 .card h3{margin:0 0 8px;font-size:21px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:16px}
@@ -131,9 +133,9 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 </div></nav>
 
 <header class="hero"><div class="wrap">
- <span class="eyebrow reveal"><i></i>New in 3.2.0 · Kick QR sign-in</span>
+ <span class="eyebrow reveal"><i></i>Available on Fire TV and Android TV</span>
  <h1 class="reveal" style="--d:.08s">Twitch and Kick,<br><em>together</em> on your TV.</h1>
- <p class="sub reveal" style="--d:.16s">Connect Kick by QR from your phone: scan, confirm and your followed channels appear automatically. Twitch and Kick together, up to four live streams and synced VODs.</p>
+ <p class="sub reveal" style="--d:.16s">DuoX TV runs on Fire TV and on Android TV smart TVs. Watch Twitch and Kick together, up to four live streams at once, synced VODs, and connect Kick by QR from your phone.</p>
  <div class="cta reveal" style="--d:.24s"><a class="btn p" href="https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>Download APK</a><a class="btn g" href="https://github.com/danikdejesus1/DuoX-TV">View on GitHub</a></div>
  <p class="note reveal" style="--d:.3s">Free · 1.5 MB APK · Android 9 or later</p>
  <div class="stagewrap reveal" style="--d:.36s"><div class="duo" id="herotv">
@@ -162,6 +164,11 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 </div></section>
 
 <section style="padding-top:0"><div class="wrap"><div class="stats reveal"><div><b>4</b><span>channels at once</span></div><div><b>2</b><span>platforms: Twitch and Kick</span></div><div><b>1.5 MB</b><span>APK size</span></div><div><b>0</b><span>own servers or analytics</span></div></div></div></section>
+
+<section style="padding-top:60px"><div class="wrap">
+ <div class="sec-h reveal"><h2>Which devices does it support?</h2></div>
+ <div class="cards devices"><div class="card reveal" style="--d:0.0s"><h3>Amazon Fire TV Stick</h3><p>Models running Android-based Fire OS 7 or 8. Tested on Fire OS 7; Vega OS models cannot run this APK.</p></div><div class="card reveal" style="--d:0.1s"><h3>Android TV smart TVs</h3><p>Sony, TCL, Hisense, Philips or Xiaomi models with Android TV or Google TV based on Android 9 or later. Check your model’s operating system.</p></div><div class="card reveal" style="--d:0.2s"><h3>Android TV boxes</h3><p>Boxes or dongles running Android TV 9 or later (API 28+) that allow APK installation.</p></div><div class="card reveal" style="--d:0.30000000000000004s"><h3>NVIDIA Shield and similar</h3><p>Requires Android TV 9 or later. Video quality and simultaneous streams depend on the hardware; not every model has been tested.</p></div></div>
+</div></section>
 
 <section id="install" style="padding-top:40px"><div class="wrap">
  <div class="sec-h reveal"><h2>Install it in a minute</h2></div>
