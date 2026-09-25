@@ -14,9 +14,9 @@ T = {
   desc="DuoX TV es una app gratuita para ver Twitch y Kick en Fire TV y Android TV: multivista de hasta 4 canales, VOD sincronizados por voz, búsqueda con voz, chat con QR y mando en mano.",
   nav=[("#funciones", "Funciones"), ("#vodsync", "VODSYNC"), ("#instalar", "Instalar"), ("#faq", "Preguntas")],
   get="Descargar APK", gh="Ver en GitHub",
-  eyebrow="Nuevo en 3.2.0 · Kick por QR",
+  eyebrow="Disponible en Fire TV y Android TV",
   h1="Twitch y Kick,<br><em>juntos</em> en tu tele.",
-  sub="Conecta Kick por QR desde tu móvil: escanea, confirma y tus seguidos aparecen solos. Twitch y Kick juntos, hasta cuatro directos a la vez y VOD sincronizados.",
+  sub="DuoX TV funciona en Fire TV y en Smart TV con Android TV. Mira Twitch y Kick juntos, hasta cuatro directos a la vez, VOD sincronizados y conecta Kick por QR desde tu móvil.",
   note="Gratis · APK de 1,5 MB · Android 9 o posterior",
   strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multivista", "VOD sincronizada", "Búsqueda por voz", "Chat con QR", "Español", "English"],
   fh="Todo lo que echabas de menos en la tele",
@@ -30,6 +30,11 @@ T = {
   ],
   stats=[("4", "canales a la vez"), ("2", "plataformas: Twitch y Kick"), ("1,5 MB", "de APK"), ("0", "servidores propios ni analítica")],
   vs=dict(h="Mira dos streams del mismo momento, de verdad sincronizados",p="Cuando dos streamers juegan juntos, cada uno emite su propio punto de vista. VODSYNC pone los VOD lado a lado y los alinea por el audio, sin que tengas que buscar el segundo exacto.",a1="Elegir el VOD de referencia de AuronPlay en VODSYNC",c1="1 · Busca el canal y elige el VOD de referencia. Las siguientes pantallas sugieren VOD del mismo día y con título parecido.",a2="AuronPlay y JuanSGuarnizo sincronizados",c2="2 · AuronPlay y JuanSGuarnizo lado a lado, en el mismo instante (Auron 5 – Juan 9 en ambas pantallas).",steps=[("Elige canales","Hasta cuatro pantallas, de Twitch o Kick."),("Sugerencias","Primero los VOD del mismo día y título parecido."),("Alineación por voz","Analiza audio corto en segundo plano y busca dónde hablan juntos."),("Ajuste manual","Si no hay voces compartidas, mueves el desfase de cada pantalla.")]),
+  dh="¿En qué dispositivos funciona?",
+  devices=[("Amazon Fire TV Stick", "Modelos con Fire OS 7 u 8, basados en Android. Probado en Fire OS 7; los modelos con Vega OS no admiten este APK."),
+           ("Smart TV con Android TV", "Modelos de Sony, TCL, Hisense, Philips o Xiaomi con Android TV o Google TV basado en Android 9 o posterior. Comprueba el sistema de tu modelo."),
+           ("Cajitas Android TV", "Cajas o dongles con Android TV 9 o posterior (API 28+) que permitan instalar archivos APK."),
+           ("NVIDIA Shield y similares", "Requiere Android TV 9 o posterior. La calidad y el número de vídeos simultáneos dependen del hardware; no se ha probado cada modelo.")],
   ih="Instálala en un minuto",
   isteps=[("Instala Downloader", "Desde la Appstore de tu Fire TV, busca «Downloader» e instálalo. Actívale el permiso de «apps desconocidas»."),
           ("Escribe el código", "Ábrelo, escribe el código 9565357 en la casilla de arriba y pulsa Ir."),
@@ -57,9 +62,9 @@ T = {
   desc="DuoX TV is a free app to watch Twitch and Kick on Fire TV and Android TV: multiview of up to 4 channels, voice-synced VODs, voice search, QR chat and full remote control.",
   nav=[("#features", "Features"), ("#vodsync", "VODSYNC"), ("#install", "Install"), ("#faq", "FAQ")],
   get="Download APK", gh="View on GitHub",
-  eyebrow="New in 3.2.0 · Kick QR sign-in",
+  eyebrow="Available on Fire TV and Android TV",
   h1="Twitch and Kick,<br><em>together</em> on your TV.",
-  sub="Connect Kick by QR from your phone: scan, confirm and your followed channels appear automatically. Twitch and Kick together, up to four live streams and synced VODs.",
+  sub="DuoX TV runs on Fire TV and on Android TV smart TVs. Watch Twitch and Kick together, up to four live streams at once, synced VODs, and connect Kick by QR from your phone.",
   note="Free · 1.5 MB APK · Android 9 or later",
   strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multiview", "Synced VODs", "Voice search", "QR chat", "English", "Español"],
   fh="Everything you missed on the big screen",
@@ -73,6 +78,11 @@ T = {
   ],
   stats=[("4", "channels at once"), ("2", "platforms: Twitch and Kick"), ("1.5 MB", "APK size"), ("0", "own servers or analytics")],
   vs=dict(h="Watch two streams of the same moment, truly in sync",p="When two streamers play together, each one broadcasts their own point of view. VODSYNC puts the VODs side by side and aligns them by audio, so you never hunt for the exact second.",a1="Choosing AuronPlay's reference VOD in VODSYNC",c1="1 · Search a channel and pick the reference VOD. The next screens suggest same-day VODs with similar titles.",a2="AuronPlay and JuanSGuarnizo synced",c2="2 · AuronPlay and JuanSGuarnizo side by side at the same instant (Auron 5 – Juan 9 on both screens).",steps=[("Pick channels","Up to four screens, from Twitch or Kick."),("Suggestions","Same-day VODs with similar titles come first."),("Voice alignment","It analyzes short audio in the background and finds where they talk together."),("Manual fine-tune","If there are no shared voices, adjust each screen's offset by hand.")]),
+  dh="Which devices does it support?",
+  devices=[("Amazon Fire TV Stick", "Models running Android-based Fire OS 7 or 8. Tested on Fire OS 7; Vega OS models cannot run this APK."),
+           ("Android TV smart TVs", "Sony, TCL, Hisense, Philips or Xiaomi models with Android TV or Google TV based on Android 9 or later. Check your model’s operating system."),
+           ("Android TV boxes", "Boxes or dongles running Android TV 9 or later (API 28+) that allow APK installation."),
+           ("NVIDIA Shield and similar", "Requires Android TV 9 or later. Video quality and simultaneous streams depend on the hardware; not every model has been tested.")],
   ih="Install it in a minute",
   isteps=[("Get Downloader", "Search “Downloader” in your Fire TV Appstore and install it. Allow it to install unknown apps."),
           ("Enter the code", "Open it, type the code 9565357 in the box at the top and press Go."),
@@ -190,6 +200,8 @@ h2{font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.035em;font
 .stats span{color:var(--muted);font-size:15px}
 /* install */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards.devices{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.cards.devices{grid-template-columns:1fr}}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px}
 .card .n{width:38px;height:38px;border-radius:12px;background:rgba(163,244,207,.1);color:var(--mint);display:grid;place-items:center;font-weight:800;margin-bottom:18px}
 .card h3{margin:0 0 8px;font-size:21px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:16px}
@@ -260,6 +272,11 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 </div></section>
 
 <section style="padding-top:0"><div class="wrap"><div class="stats reveal">{{stats}}</div></div></section>
+
+<section style="padding-top:60px"><div class="wrap">
+ <div class="sec-h reveal"><h2>{{dh}}</h2></div>
+ <div class="cards devices">{{devices}}</div>
+</div></section>
 
 <section id="{{iid}}" style="padding-top:40px"><div class="wrap">
  <div class="sec-h reveal"><h2>{{ih}}</h2></div>
@@ -341,6 +358,8 @@ def build(code):
         "steps": "".join(steps), "stage": "".join(stage),
         "stats": "".join(f'<div><b>{e(n)}</b><span>{e(t)}</span></div>' for n, t in d["stats"]),
         "isteps": "".join(f'<div class="card reveal" style="--d:{k*.1}s"><div class="n">{k+1}</div><h3>{e(t)}</h3><p>{e(x)}</p></div>' for k, (t, x) in enumerate(d["isteps"])),
+        "dh": d["dh"],
+        "devices": "".join(f'<div class="card reveal" style="--d:{k*.1}s"><h3>{e(t)}</h3><p>{e(x)}</p></div>' for k, (t, x) in enumerate(d["devices"])),
         "install_h_code": d["install_h_code"], "dl_code_label": d["dl_code_label"], "dl_code_hint": d["dl_code_hint"], "copy": d["copy"], "copied": d["copied"], "faq": faq,
         "cta_h": d["cta_h"], "cta_p": d["cta_p"], "issues": d["issues"], "made": d["made"], "privacy": d["privacy"], "foot": e(d["foot"]),
         "vs_h": d["vs"]["h"], "vs_p": d["vs"]["p"], "vs_a1": html.escape(d["vs"]["a1"]), "vs_a2": html.escape(d["vs"]["a2"]), "vs_c1": e(d["vs"]["c1"]), "vs_c2": e(d["vs"]["c2"]),
