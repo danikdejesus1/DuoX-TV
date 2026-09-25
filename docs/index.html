@@ -92,6 +92,8 @@ h2{font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.035em;font
 .stats span{color:var(--muted);font-size:15px}
 /* install */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards.devices{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.cards.devices{grid-template-columns:1fr}}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px}
 .card .n{width:38px;height:38px;border-radius:12px;background:rgba(163,244,207,.1);color:var(--mint);display:grid;place-items:center;font-weight:800;margin-bottom:18px}
 .card h3{margin:0 0 8px;font-size:21px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:16px}
@@ -133,7 +135,7 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 <header class="hero"><div class="wrap">
  <span class="eyebrow reveal"><i></i>Disponible en Fire TV y Android TV</span>
  <h1 class="reveal" style="--d:.08s">Twitch y Kick,<br><em>juntos</em> en tu tele.</h1>
- <p class="sub reveal" style="--d:.16s">DuoX TV funciona en Fire TV y en Smart TV con Android TV. Mira Twitch y Kick juntos, hasta cuatro directos a la vez, VOD sincronizados y conecta Kick por QR desde tu móvil en segundos.</p>
+ <p class="sub reveal" style="--d:.16s">DuoX TV funciona en Fire TV y en Smart TV con Android TV. Mira Twitch y Kick juntos, hasta cuatro directos a la vez, VOD sincronizados y conecta Kick por QR desde tu móvil.</p>
  <div class="cta reveal" style="--d:.24s"><a class="btn p" href="https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>Descargar APK</a><a class="btn g" href="https://github.com/danikdejesus1/DuoX-TV">Ver en GitHub</a></div>
  <p class="note reveal" style="--d:.3s">Gratis · APK de 1,5 MB · Android 9 o posterior</p>
  <div class="stagewrap reveal" style="--d:.36s"><div class="duo" id="herotv">
@@ -165,7 +167,7 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 
 <section style="padding-top:60px"><div class="wrap">
  <div class="sec-h reveal"><h2>¿En qué dispositivos funciona?</h2></div>
- <div class="cards"><div class="card reveal" style="--d:0.0s"><h3>Amazon Fire TV Stick</h3><p>Todas las generaciones: HD, 4K, 4K Max y Fire TV Cube.</p></div><div class="card reveal" style="--d:0.1s"><h3>Smart TV con Android TV</h3><p>Sony, TCL, Hisense, Philips, Xiaomi y cualquier televisor con Android TV o Google TV.</p></div><div class="card reveal" style="--d:0.2s"><h3>Cajitas Android TV</h3><p>Cualquier caja o dongle con Android TV 9 o posterior (API 28+).</p></div><div class="card reveal" style="--d:0.30000000000000004s"><h3>NVIDIA Shield y similares</h3><p>Cualquier dispositivo Android TV genérico con acceso a Downloader o instalación manual.</p></div></div>
+ <div class="cards devices"><div class="card reveal" style="--d:0.0s"><h3>Amazon Fire TV Stick</h3><p>Modelos con Fire OS 7 u 8, basados en Android. Probado en Fire OS 7; los modelos con Vega OS no admiten este APK.</p></div><div class="card reveal" style="--d:0.1s"><h3>Smart TV con Android TV</h3><p>Modelos de Sony, TCL, Hisense, Philips o Xiaomi con Android TV o Google TV basado en Android 9 o posterior. Comprueba el sistema de tu modelo.</p></div><div class="card reveal" style="--d:0.2s"><h3>Cajitas Android TV</h3><p>Cajas o dongles con Android TV 9 o posterior (API 28+) que permitan instalar archivos APK.</p></div><div class="card reveal" style="--d:0.30000000000000004s"><h3>NVIDIA Shield y similares</h3><p>Requiere Android TV 9 o posterior. La calidad y el número de vídeos simultáneos dependen del hardware; no se ha probado cada modelo.</p></div></div>
 </div></section>
 
 <section id="instalar" style="padding-top:40px"><div class="wrap">
