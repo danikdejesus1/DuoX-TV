@@ -1,3 +1,8 @@
+# DuoX TV 3.2.3
+
+- **Corregido: el botón ↻ Actualización encontraba la nueva versión pero no la dejaba descargar** ("La publicación todavía no tiene un APK compatible"). Era una comparación de mayúsculas/minúsculas en la ruta del repositorio de GitHub que no coincidía tras el cambio de cuenta. Verificado con una descarga e instalación real completa.
+- **Nota para quien ya tiene 3.2.1 o 3.2.2 instalada:** por este mismo motivo, esta es la única versión que hace falta instalar manualmente una vez (Downloader, código 9565357). Después de esta, el botón de actualizar vuelve a funcionar normal.
+
 # DuoX TV 3.2.2
 
 - **Corregido: Atrás en el reproductor cerraba la app.** En vez de volver al Home, el botón Atrás a veces cerraba DuoX por completo. Ya vuelve al Home de forma confiable, sin importar si vienes de un directo o de un VOD.
