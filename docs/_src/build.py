@@ -3,8 +3,8 @@
 import html, json, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://danikdejesus1.github.io/DuoX-TV/"
-REPO = "https://github.com/danikdejesus1/DuoX-TV"
+SITE = "https://errorx0x.github.io/DuoX-TV/"
+REPO = "https://github.com/errorx0x/DuoX-TV"
 APK = REPO + "/releases/latest/download/DuoX.apk"
 
 T = {
@@ -41,7 +41,7 @@ T = {
           ("Instala y disfruta", "Acepta la instalación. Desde dentro, el icono ↻ avisa de nuevas versiones y las descarga.")],
   copy="Copiar", copied="Copiado",
   fq=[
-   ("¿Qué es DuoX TV?", "DuoX TV es una app gratuita para Fire TV y Android TV que permite ver directos y VOD de Twitch y Kick con el mando, con multivista de hasta cuatro canales, VOD sincronizados, búsqueda por voz y chat con código QR. Está creada por DanikDeJesus."),
+   ("¿Qué es DuoX TV?", "DuoX TV es una app gratuita para Fire TV y Android TV que permite ver directos y VOD de Twitch y Kick con el mando, con multivista de hasta cuatro canales, VOD sincronizados, búsqueda por voz y chat con código QR. Está creada por errorx0x."),
    ("¿Funciona en Amazon Fire TV Stick?", "Sí. Está pensada para Fire TV (Fire OS 7 o posterior) y funciona en Android TV 9 o posterior. Se ha probado en Fire OS 7; cuatro directos a máxima calidad pueden exceder la capacidad de un Fire TV HD, por eso la calidad se limita al usar varias pantallas."),
    ("¿Puedo ver Twitch y Kick en la misma pantalla?", "Sí, ese es el objetivo. La multivista mezcla canales de las dos plataformas y permite elegir cuál suena."),
    ("¿Qué es la VOD sincronizada?", "Reproduce varios VOD de streamers que hablaron juntos en el mismo momento. La app compara el audio en segundo plano para alinearlos; si no encuentra voces compartidas, empieza en la hora de inicio y puedes ajustar el desfase a mano."),
@@ -52,7 +52,7 @@ T = {
   ],
   cta_h="Pruébala en tu Fire TV", cta_p="Descarga el APK, instálala y dinos qué mejorarías.",
   foot="DuoX TV es un cliente independiente y experimental, no afiliado a Twitch, Kick ni Amazon. Las marcas, los nombres de canales y las imágenes de las capturas pertenecen a sus respectivos titulares.",
-  made="Creada por DanikDeJesus", privacy="Privacidad", issues="Reportar un problema",
+  made="Creada por errorx0x", privacy="Privacidad", issues="Reportar un problema",
   install_h_code="Enlace de descarga directa",
   dl_code_label="Código de Downloader",dl_code_hint="Escribe solo este número en Downloader y pulsa Ir.",
  ),
@@ -89,7 +89,7 @@ T = {
           ("Install and enjoy", "Accept the install. Inside the app, the ↻ icon checks for new versions and downloads them.")],
   copy="Copy", copied="Copied",
   fq=[
-   ("What is DuoX TV?", "DuoX TV is a free app for Fire TV and Android TV to watch Twitch and Kick live streams and VODs with a remote, featuring multiview of up to four channels, synced VODs, voice search and QR chat. It is created by DanikDeJesus."),
+   ("What is DuoX TV?", "DuoX TV is a free app for Fire TV and Android TV to watch Twitch and Kick live streams and VODs with a remote, featuring multiview of up to four channels, synced VODs, voice search and QR chat. It is created by errorx0x."),
    ("Does it work on Amazon Fire TV Stick?", "Yes. It is built for Fire TV (Fire OS 7 or later) and runs on Android TV 9 or later. It has been tested on Fire OS 7; four streams at top quality can exceed what an entry-level Fire TV can decode, so quality is capped when using several screens."),
    ("Can I watch Twitch and Kick on the same screen?", "Yes, that is the point. Multiview mixes channels from both platforms and lets you choose which one plays audio."),
    ("What are synced VODs?", "It plays several VODs of streamers who talked together at the same moment. The app compares audio in the background to align them; if it finds no shared voices it starts at the start time and you can adjust the offset by hand."),
@@ -100,7 +100,7 @@ T = {
   ],
   cta_h="Try it on your Fire TV", cta_p="Download the APK, install it and tell us what you would improve.",
   foot="DuoX TV is an independent, experimental client, not affiliated with Twitch, Kick or Amazon. Trademarks, channel names and the images in the screenshots belong to their respective owners.",
-  made="Created by DanikDeJesus", privacy="Privacy", issues="Report an issue",
+  made="Created by errorx0x", privacy="Privacy", issues="Report an issue",
   install_h_code="Direct download link",
   dl_code_label="Downloader code",dl_code_hint="Just type this number in Downloader and press Go.",
  ),
@@ -340,7 +340,7 @@ def build(code):
         "downloadUrl": APK, "softwareVersion": "3.0.1", "image": SITE + "img/og.jpg",
         "inLanguage": ["es", "en"], "isAccessibleForFree": True,
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "author": {"@type": "Person", "name": "DanikDeJesus", "url": "https://github.com/danikdejesus1"},
+        "author": {"@type": "Person", "name": "errorx0x", "url": "https://github.com/errorx0x"},
         "codeRepository": REPO,
         "featureList": ["Multiview of up to 4 Twitch and Kick channels", "Voice-synced VODs", "Voice search", "QR chat", "In-app updates"],
     }
@@ -383,7 +383,7 @@ def build(code):
     + "</urlset>\n", encoding="utf-8")
 (ROOT / "llms.txt").write_text(f"""# DuoX TV
 
-> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by DanikDeJesus. Not affiliated with Twitch, Kick or Amazon.
+> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by errorx0x. Not affiliated with Twitch, Kick or Amazon.
 
 DuoX TV (also written DuoX) is an alternative Twitch and Kick client for Amazon Fire TV Stick, Fire TV Cube and Android TV 9+. APK size is about 1.5 MB. Package: tv.duox.tv.
 
