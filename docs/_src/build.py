@@ -19,17 +19,21 @@ T = {
   sub="DuoX TV funciona en Fire TV y en Smart TV con Android TV. Mira Twitch y Kick juntos, hasta cuatro directos a la vez, VOD sincronizados y conecta Kick por QR desde tu móvil.",
   note="Gratis · APK de 1,5 MB · Android 9 o posterior",
   strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multivista", "VOD sincronizada", "Búsqueda por voz", "Chat con QR", "Español", "English"],
+  wn_kicker="Novedades 3.2.1", wn_h="Menos interrupciones, más control",
+  wn=[("Vuelta automática al Home", "Si el directo que ves termina, DuoX no se queda congelada: te lleva de vuelta al Home automáticamente en vez de dejarte con la pantalla en negro."),
+      ("¿Sigues ahí?", "Si pasas 10 minutos sin tocar el mando estando en el Home, un aviso pequeño y discreto pregunta si sigues ahí antes de cerrarse solo."),
+      ("Panel en vivo sin parpadeos", "Se actualiza cada 20 segundos en vez de 60 y ya no salta: el orden por espectadores se mantiene y, si alguien cambia de puesto, el icono se desliza en vez de saltar de golpe.")],
   fh="Todo lo que echabas de menos en la tele",
   steps=[
    ("home", "Inicio", "Tus directos, de un vistazo", "Un panel LIVE con tus canales de Twitch y Kick ordenados por espectadores y una preview en vivo del que tengas seleccionado. Sin menús: todo con el mando.", "Inicio de DuoX TV con Spreen en directo (DEDSAFIO), preview y panel LIVE con tus canales"),
-   ("multiview", "Multivista", "Hasta cuatro directos a la vez", "Mezcla Twitch y Kick en la misma pantalla. Elige qué canal suena con arriba y abajo y ajusta la calidad de cada uno sin salir del reproductor.", "Multivista de DuoX TV con Spreen, Farfadox, juansguarnizo e IlloJuan en directo"),
-   ("vodsync", "VODSYNC", "Dos puntos de vista, un mismo momento", "Elige hasta cuatro VOD y DuoX TV analiza el audio en segundo plano para alinearlos justo donde los streamers hablan juntos. Aquí, AuronPlay y JuanSGuarnizo en el mismo instante.", "VODSYNC de DuoX TV con VOD de AuronPlay y JuanSGuarnizo sincronizados lado a lado"),
+   ("multiview", "Multivista", "Hasta cuatro directos a la vez", "Mezcla Twitch y Kick en la misma pantalla. Elige qué canal suena con arriba y abajo y ajusta la calidad de cada uno sin salir del reproductor.", "Multivista de DuoX TV con Spreen y Conterstine jugando juntos en directo"),
+   ("vodsync", "VODSYNC", "Dos puntos de vista, un mismo momento", "Elige hasta cuatro VOD y DuoX TV analiza el audio en segundo plano para alinearlos justo donde los streamers hablan juntos. Con controles para alinear los vídeos y elegir qué canal se escucha.", "VODSYNC de DuoX TV con VOD de JuanSGuarnizo y Farfadox y controles de alineación"),
    ("search", "Búsqueda", "Encuentra cualquier canal", "Teclado propio, búsqueda por voz y resultados reales de Twitch y Kick con los directos primero.", "Buscador de DuoX TV con resultados de «sp»: Spreen en directo y canales de Twitch y Kick"),
-   ("profile", "Perfiles", "Directo en vivo y todos sus VOD", "Cada canal tiene su preview del directo, los VOD con fecha y «Continuar viendo» para retomar donde lo dejaste.", "Perfil de Spreen con preview en directo y lista de VOD"),
+   ("profile", "Perfiles", "Directo en vivo y todos sus VOD", "Cada canal tiene su preview del directo, los VOD con fecha y «Continuar viendo» para retomar donde lo dejaste.", "Perfil de elxokas con preview en directo y lista de VOD"),
    ("player", "Reproductor", "Controles mínimos, todo con el mando", "Una barra fina y translúcida con iconos. Calidad automática o manual, favoritos y chat con un QR para leerlo en el móvil.", "Reproductor de DuoX TV con Spreen, el panel de directos a la izquierda y la barra de controles"),
   ],
   stats=[("4", "canales a la vez"), ("2", "plataformas: Twitch y Kick"), ("1,5 MB", "de APK"), ("0", "servidores propios ni analítica")],
-  vs=dict(h="Mira dos streams del mismo momento, de verdad sincronizados",p="Cuando dos streamers juegan juntos, cada uno emite su propio punto de vista. VODSYNC pone los VOD lado a lado y los alinea por el audio, sin que tengas que buscar el segundo exacto.",a1="Elegir el VOD de referencia de AuronPlay en VODSYNC",c1="1 · Busca el canal y elige el VOD de referencia. Las siguientes pantallas sugieren VOD del mismo día y con título parecido.",a2="AuronPlay y JuanSGuarnizo sincronizados",c2="2 · AuronPlay y JuanSGuarnizo lado a lado, en el mismo instante (Auron 5 – Juan 9 en ambas pantallas).",steps=[("Elige canales","Hasta cuatro pantallas, de Twitch o Kick."),("Sugerencias","Primero los VOD del mismo día y título parecido."),("Alineación por voz","Analiza audio corto en segundo plano y busca dónde hablan juntos."),("Ajuste manual","Si no hay voces compartidas, mueves el desfase de cada pantalla.")]),
+  vs=dict(h="Mira dos streams del mismo momento, de verdad sincronizados",p="Cuando dos streamers juegan juntos, cada uno emite su propio punto de vista. VODSYNC pone los VOD lado a lado y los alinea por el audio, sin que tengas que buscar el segundo exacto.",a1="VOD sugeridos según JuanSGuarnizo en VODSYNC",c1="1 · Busca el canal y elige el VOD de referencia. Las siguientes pantallas sugieren VOD del mismo día y con título parecido.",a2="JuanSGuarnizo y Farfadox en VODSYNC",c2="2 · Abre los VOD juntos y utiliza Alinear para buscar el momento compartido. Puedes ajustar el desfase manualmente.",steps=[("Elige canales","Hasta cuatro pantallas, de Twitch o Kick."),("Sugerencias","Primero los VOD del mismo día y título parecido."),("Alineación por voz","Analiza audio corto en segundo plano y busca dónde hablan juntos."),("Ajuste manual","Si no hay voces compartidas, mueves el desfase de cada pantalla.")]),
   dh="¿En qué dispositivos funciona?",
   devices=[("Amazon Fire TV Stick", "Modelos con Fire OS 7 u 8, basados en Android. Probado en Fire OS 7; los modelos con Vega OS no admiten este APK."),
            ("Smart TV con Android TV", "Modelos de Sony, TCL, Hisense, Philips o Xiaomi con Android TV o Google TV basado en Android 9 o posterior. Comprueba el sistema de tu modelo."),
@@ -67,17 +71,21 @@ T = {
   sub="DuoX TV runs on Fire TV and on Android TV smart TVs. Watch Twitch and Kick together, up to four live streams at once, synced VODs, and connect Kick by QR from your phone.",
   note="Free · 1.5 MB APK · Android 9 or later",
   strip=["Twitch", "Kick", "Fire TV", "Android TV", "Multiview", "Synced VODs", "Voice search", "QR chat", "English", "Español"],
+  wn_kicker="New in 3.2.1", wn_h="Fewer interruptions, more control",
+  wn=[("Back to Home on its own", "If the stream you're watching ends, DuoX won't freeze on the last frame: it takes you back to Home automatically instead of leaving you on a black screen."),
+      ("Still there?", "After 10 minutes with no remote input on Home, a small, discreet prompt asks if you're still there before closing itself."),
+      ("A live panel that doesn't flicker", "It refreshes every 20 seconds instead of 60 and no longer jumps: the viewer-count order stays put, and when someone changes rank the icon slides instead of snapping.")],
   fh="Everything you missed on the big screen",
   steps=[
-   ("home-en", "Home", "Your live channels at a glance", "A LIVE panel with your Twitch and Kick channels sorted by viewers and a live preview of the one you select. No menus: everything with the remote.", "DuoX TV home with IlloJuan live, preview and a LIVE panel with your channels"),
-   ("multiview", "Multiview", "Up to four live streams at once", "Mix Twitch and Kick on the same screen. Pick which channel plays audio with up and down and set the quality of each one without leaving the player.", "DuoX TV multiview with Spreen, Farfadox, juansguarnizo and IlloJuan live"),
-   ("vodsync", "VODSYNC", "Two points of view, one moment", "Choose up to four VODs and DuoX TV analyzes the audio in the background to line them up right where the streamers talk together. Here, AuronPlay and JuanSGuarnizo at the same instant.", "DuoX TV VODSYNC with AuronPlay and JuanSGuarnizo VODs synced side by side"),
+   ("home-en", "Home", "Your live channels at a glance", "A LIVE panel with your Twitch and Kick channels sorted by viewers and a live preview of the one you select. No menus: everything with the remote.", "DuoX TV home with Spreen live, preview and a LIVE panel with your channels"),
+   ("multiview", "Multiview", "Up to four live streams at once", "Mix Twitch and Kick on the same screen. Pick which channel plays audio with up and down and set the quality of each one without leaving the player.", "DuoX TV multiview with Spreen and Conterstine playing together live"),
+   ("vodsync", "VODSYNC", "Two points of view, one moment", "Choose up to four VODs and DuoX TV analyzes the audio in the background to line them up right where the streamers talk together. With controls to align the videos and choose which channel plays audio.", "DuoX TV VODSYNC with JuanSGuarnizo and Farfadox VODs and alignment controls"),
    ("search", "Search", "Find any channel", "Built-in keyboard, voice search and real Twitch and Kick results with live channels first.", "DuoX TV search for “sp”: Spreen live first, then Twitch and Kick channels"),
-   ("profile", "Profiles", "Live preview and every VOD", "Each channel has its live preview, dated VODs and “Continue watching” so you pick up where you left off.", "Spreen profile with live preview and VOD list"),
+   ("profile", "Profiles", "Live preview and every VOD", "Each channel has its live preview, dated VODs and “Continue watching” so you pick up where you left off.", "elxokas profile with live preview and VOD list"),
    ("player", "Player", "Minimal controls, all with the remote", "A thin translucent bar with icons. Auto or manual quality, favorites and a QR chat you can read on your phone.", "DuoX TV player with Spreen, the live panel on the left and the control bar"),
   ],
   stats=[("4", "channels at once"), ("2", "platforms: Twitch and Kick"), ("1.5 MB", "APK size"), ("0", "own servers or analytics")],
-  vs=dict(h="Watch two streams of the same moment, truly in sync",p="When two streamers play together, each one broadcasts their own point of view. VODSYNC puts the VODs side by side and aligns them by audio, so you never hunt for the exact second.",a1="Choosing AuronPlay's reference VOD in VODSYNC",c1="1 · Search a channel and pick the reference VOD. The next screens suggest same-day VODs with similar titles.",a2="AuronPlay and JuanSGuarnizo synced",c2="2 · AuronPlay and JuanSGuarnizo side by side at the same instant (Auron 5 – Juan 9 on both screens).",steps=[("Pick channels","Up to four screens, from Twitch or Kick."),("Suggestions","Same-day VODs with similar titles come first."),("Voice alignment","It analyzes short audio in the background and finds where they talk together."),("Manual fine-tune","If there are no shared voices, adjust each screen's offset by hand.")]),
+  vs=dict(h="Watch two streams of the same moment, truly in sync",p="When two streamers play together, each one broadcasts their own point of view. VODSYNC puts the VODs side by side and aligns them by audio, so you never hunt for the exact second.",a1="Suggested VODs based on JuanSGuarnizo in VODSYNC",c1="1 · Search a channel and pick the reference VOD. The next screens suggest same-day VODs with similar titles.",a2="JuanSGuarnizo and Farfadox in VODSYNC",c2="2 · Open the VODs together and use Align to find the shared moment. You can adjust the offset manually.",steps=[("Pick channels","Up to four screens, from Twitch or Kick."),("Suggestions","Same-day VODs with similar titles come first."),("Voice alignment","It analyzes short audio in the background and finds where they talk together."),("Manual fine-tune","If there are no shared voices, adjust each screen's offset by hand.")]),
   dh="Which devices does it support?",
   devices=[("Amazon Fire TV Stick", "Models running Android-based Fire OS 7 or 8. Tested on Fire OS 7; Vega OS models cannot run this APK."),
            ("Android TV smart TVs", "Sony, TCL, Hisense, Philips or Xiaomi models with Android TV or Google TV based on Android 9 or later. Check your model’s operating system."),
@@ -141,8 +149,19 @@ body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Inter,"SF
 a{color:inherit;text-decoration:none}img{max-width:100%}
 .wrap{width:min(1180px,100% - 40px);margin:0 auto}
 .wm{font-weight:800;letter-spacing:-.03em;font-size:22px;display:inline-flex;align-items:baseline;gap:2px}.wm b{color:var(--mint2)}.wm small{font-size:.5em;font-weight:700;color:var(--muted);margin-left:3px;letter-spacing:.02em}
-nav{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s,border-color .3s,opacity .4s;border-bottom:1px solid transparent;opacity:0;pointer-events:none}
+nav.shown{opacity:1;pointer-events:auto}
 nav.solid{background:rgba(7,15,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--line)}
+/* intro */
+.intro{height:180vh;position:relative}
+.intro .pin{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden;text-align:center}
+.intro .pin:before{content:"";position:absolute;left:50%;top:50%;width:1400px;height:1000px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(94,234,176,.16),rgba(169,112,255,.05) 55%,transparent 75%);pointer-events:none}
+.intro .wm{position:relative;font-size:clamp(56px,15vw,220px);gap:.06em;transform:scale(calc(1 - var(--ip,0) * .3));opacity:calc(1 - var(--ip,0) * 1.15);will-change:transform,opacity}
+.intro .hint{position:absolute;left:50%;bottom:56px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:calc(1 - var(--ip,0) * 3)}
+.intro .hint svg{width:20px;height:20px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media (max-width:920px){.intro{height:130vh}}
+@media (prefers-reduced-motion:reduce){.intro{height:auto}.intro .pin{position:relative;top:auto;height:80vh}.intro .wm,.intro .hint{opacity:1;transform:none}.intro .hint svg{animation:none}}
 nav .wrap{display:flex;align-items:center;gap:26px;height:66px}nav .brand{display:flex;align-items:center}nav .wm{font-size:24px}
 nav .links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:var(--muted)}nav .links a:hover{color:var(--text)}
 nav .lang{font-size:14px;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:99px}nav .lang:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
@@ -240,6 +259,11 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
  <a class="btn p s" href="{{apk}}">{{get}}</a>
 </div></nav>
 
+<section class="intro" aria-hidden="true"><div class="pin">
+ <span class="wm">Duo<b>X</b><small>TV</small></span>
+ <div class="hint"><span>Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></svg></div>
+</div></section>
+
 <header class="hero"><div class="wrap">
  <span class="eyebrow reveal"><i></i>{{eyebrow}}</span>
  <h1 class="reveal" style="--d:.08s">{{h1}}</h1>
@@ -254,7 +278,12 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 
 <div class="strip" aria-hidden="true"><div>{{strip}}{{strip}}</div></div>
 
-<section id="{{fid}}"><div class="wrap">
+<section style="padding-bottom:40px"><div class="wrap">
+ <div class="sec-h reveal"><span class="kicker">{{wn_kicker}}</span><h2>{{wn_h}}</h2></div>
+ <div class="cards">{{wn}}</div>
+</div></section>
+
+<section id="{{fid}}" style="padding-top:60px"><div class="wrap">
  <div class="sec-h reveal"><h2>{{fh}}</h2></div>
  <div class="story">
   <div class="steps">{{steps}}</div>
@@ -303,12 +332,13 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 <script>
 (()=>{
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const nav=$('#nav'),tv=$('#herotv');
+const nav=$('#nav'),tv=$('#herotv'),intro=$('.intro');
 if(!('IntersectionObserver' in window)){$$('.reveal').forEach(el=>el.classList.add('in'))}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -5% 0px'});
 $$('.reveal').forEach(el=>io.observe(el));
 let tick=false;
-function frame(){tick=false;const y=scrollY,p=Math.min(1,y/(innerHeight*.5));tv.style.setProperty('--p',p.toFixed(3));nav.classList.toggle('solid',y>16)}
+function frame(){tick=false;const y=scrollY,p=Math.min(1,y/(innerHeight*.5));tv.style.setProperty('--p',p.toFixed(3));nav.classList.toggle('solid',y>16);
+ if(intro){const span=Math.max(1,intro.offsetHeight-innerHeight),ip=Math.min(1,y/span);intro.style.setProperty('--ip',ip.toFixed(3));nav.classList.toggle('shown',ip>.5)}else nav.classList.add('shown')}
 addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});frame();
 const steps=$$('.step'),imgs=$$('#stage img');
 function activate(i){steps.forEach((s,k)=>s.classList.toggle('on',k===i));imgs.forEach((m,k)=>m.classList.toggle('on',k===i))}
@@ -337,7 +367,7 @@ def build(code):
         "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "DuoX TV",
         "alternateName": ["DuoX", "DuoX TV app"], "applicationCategory": "EntertainmentApplication",
         "operatingSystem": "Fire OS 7+, Android TV 9+", "description": d["desc"], "url": url,
-        "downloadUrl": APK, "softwareVersion": "3.0.1", "image": SITE + "img/og.jpg",
+        "downloadUrl": APK, "softwareVersion": "3.2.1", "image": SITE + "img/og.jpg",
         "inLanguage": ["es", "en"], "isAccessibleForFree": True,
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
         "author": {"@type": "Person", "name": "errorx0x", "url": "https://github.com/errorx0x"},
@@ -355,6 +385,8 @@ def build(code):
         "navlinks": "".join(f'<a href="{h}">{e(t)}</a>' for h, t in d["nav"]),
         "strip": "<span>" + "</span><span>".join(e(s) for s in d["strip"]) + "</span>",
         "fid": d["nav"][0][0][1:], "iid": d["nav"][2][0][1:], "fh": d["fh"], "ih": d["ih"],
+        "wn_kicker": d["wn_kicker"], "wn_h": d["wn_h"],
+        "wn": "".join(f'<div class="card reveal" style="--d:{k*.1}s"><h3>{e(t)}</h3><p>{e(x)}</p></div>' for k, (t, x) in enumerate(d["wn"])),
         "steps": "".join(steps), "stage": "".join(stage),
         "stats": "".join(f'<div><b>{e(n)}</b><span>{e(t)}</span></div>' for n, t in d["stats"]),
         "isteps": "".join(f'<div class="card reveal" style="--d:{k*.1}s"><div class="n">{k+1}</div><h3>{e(t)}</h3><p>{e(x)}</p></div>' for k, (t, x) in enumerate(d["isteps"])),
