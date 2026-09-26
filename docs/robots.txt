@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://errorx0x.github.io/DuoX-TV/sitemap.xml
+Sitemap: https://duox.errorx0x.com/sitemap.xml
