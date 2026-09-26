@@ -1,6 +1,6 @@
 # Dependencias y servicios
 
-Código original de DuoX TV: DanikDeJesus. Las marcas Twitch, Kick y Amazon pertenecen a sus respectivos titulares.
+Código original de DuoX TV: errorx0x. Las marcas Twitch, Kick y Amazon pertenecen a sus respectivos titulares.
 
 Dependencias:
 

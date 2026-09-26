@@ -1,3 +1,9 @@
+# DuoX TV 3.2.1
+
+- **Si un directo termina, ya no se queda congelada la pantalla:** DuoX vuelve al Home automáticamente en vez de dejarte viendo el último frame o una pantalla negra.
+- **Aviso de inactividad en el Home:** si pasas 10 minutos sin tocar el mando estando en el Home (nunca mientras ves un directo o un VOD), aparece un aviso pequeño preguntando si sigues ahí; si no respondes en 45 segundos, DuoX se cierra solo.
+- **Panel de "en vivo" más estable:** se actualiza cada 20 segundos (antes 60) y ya no salta ni parpadea en cada actualización; el orden por espectadores se mantiene y, si alguien supera a otro, los iconos se deslizan a su nuevo puesto en vez de saltar de golpe.
+
 # DuoX TV 3.2.0 — Conecta Kick por QR
 
 **Escanea, confirma y disfruta de tus seguidos.** La gran novedad de DuoX TV 3.2.0 es la conexión de Kick desde el móvil: se elimina el formulario web de inicio de sesión en el televisor.
@@ -23,7 +29,7 @@ Sin escribir tu contraseña con el mando, sin navegador de inicio de sesión en 
 ## Instalar o actualizar
 
 - Si ya usas DuoX TV, pulsa **↻ Actualización** o instala `DuoX.apk` encima de tu versión actual.
-- En Downloader: **9565357** o `https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`.
+- En Downloader: **9565357** o `https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`.
 - Fire OS 7 / Android TV 9 o posterior. APK firmado con el mismo certificado que las versiones anteriores.
 
 La vinculación y la carga de seguidos de Kick se han comprobado en un Fire TV real. DuoX TV es independiente, no oficial ni afiliada a Twitch, Kick o Amazon; la compatibilidad con los servicios puede cambiar.
@@ -96,7 +102,7 @@ Twitch y Kick en Fire TV y Android TV, con el mando. Primera versión publicada 
 - El botón ↻ de la app comprueba y descarga las nuevas versiones desde este repositorio.
 
 ## Instalar
-Con Downloader, introduce: `https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`
+Con Downloader, introduce: `https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`
 
 Si vienes de una versión anterior con otro nombre, instala esta una vez a mano: es una app distinta y tendrás que volver a conectar tus cuentas.
 

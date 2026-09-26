@@ -2,25 +2,25 @@
 
 **Twitch y Kick en Fire TV y Android TV: multivista de hasta 4 canales, VOD sincronizados y búsqueda por voz.**
 
-[Web](https://danikdejesus1.github.io/DuoX-TV/) · [Descargar APK](https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk) · [English](https://danikdejesus1.github.io/DuoX-TV/en/)
+[Web](https://errorx0x.github.io/DuoX-TV/) · [Descargar APK](https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk) · [English](https://errorx0x.github.io/DuoX-TV/en/)
 
 ![DuoX TV: multivista con cuatro directos](docs/img/multiview.jpg)
 
-## Nuevo en 3.2.0: conecta Kick por QR
+## Nuevo en 3.2.1
 
-**Escanea en el móvil, confirma el código de seis dígitos y tus seguidos aparecen solos.** Sin escribir la contraseña con el mando ni cargar un formulario web en el televisor. Abre los perfiles del Home → Kick para empezar. Si vienes del acceso web de 3.1.0, vuelve a vincular Kick una vez; no hace falta desinstalar.
+**Si un directo termina, DuoX vuelve al Home solo** en vez de dejarte con la pantalla congelada, y un aviso discreto pregunta si sigues ahí tras 10 minutos de inactividad en el Home. El panel de canales en vivo también se actualiza más rápido (cada 20 s) y sin parpadeos. Kick sigue conectándose por QR desde el móvil, sin escribir la contraseña con el mando.
 
-[Ver todas las novedades de 3.2.0](https://github.com/danikdejesus1/DuoX-TV/releases/tag/v3.2.0)
+[Ver todas las novedades de 3.2.1](https://github.com/errorx0x/DuoX-TV/releases/tag/v3.2.1)
 
-**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.0 adds Kick QR sign-in from your phone with automatic followed-channel loading. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
+**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.1 returns to Home automatically when a live stream you're watching ends, adds an idle prompt after 10 minutes of inactivity on Home, and makes the live-channels panel refresh faster and flicker-free. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
 
-**Creado por DanikDeJesus.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
+**Creado por errorx0x.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
 
 ## Descargar e instalar
 
-El APK se publica en [Releases](https://github.com/danikdejesus1/DuoX-TV/releases). En Downloader basta con escribir el código **9565357**, o introducir el enlace directo:
+El APK se publica en [Releases](https://github.com/errorx0x/DuoX-TV/releases). En Downloader basta con escribir el código **9565357**, o introducir el enlace directo:
 
-`https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk`
+`https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`
 
 Activa el permiso de instalación de aplicaciones desconocidas para Downloader, descarga el APK e instálalo.
 
@@ -55,7 +55,7 @@ El icono ↻ junto al idioma consulta nuevas versiones en GitHub y permite desca
 
 DuoX TV es una versión de pruebas. Cada persona inicia sesión con sus propias cuentas; el APK no incluye cuentas ni sesiones del creador.
 
-Para reportar un fallo, abre un [Issue](https://github.com/danikdejesus1/DuoX-TV/issues) e indica el modelo del dispositivo, versión de Fire OS/Android, plataforma (Twitch o Kick), pasos para reproducirlo y lo que esperabas que ocurriera. Puedes adjuntar una captura sin datos personales. No publiques contraseñas, cookies, códigos de acceso ni tokens.
+Para reportar un fallo, abre un [Issue](https://github.com/errorx0x/DuoX-TV/issues) e indica el modelo del dispositivo, versión de Fire OS/Android, plataforma (Twitch o Kick), pasos para reproducirlo y lo que esperabas que ocurriera. Puedes adjuntar una captura sin datos personales. No publiques contraseñas, cookies, códigos de acceso ni tokens.
 
 ## Uso con mando
 
@@ -65,7 +65,7 @@ El progreso se guarda cada 10 segundos y al salir o pausar. Los VOD vistos menos
 
 ## Compilar
 
-El código fuente completo va como archivo `DuoX-3.2.0-codigo.zip` en el [release](https://github.com/danikdejesus1/DuoX-TV/releases/latest).
+El código fuente completo va como archivo `DuoX-3.2.0-codigo.zip` en el [release](https://github.com/errorx0x/DuoX-TV/releases/latest).
 
 Necesitas JDK 17, Android SDK 35 y Build Tools 35.0.0. Configura `ANDROID_HOME` o un `local.properties` local con `sdk.dir`.
 
@@ -91,4 +91,4 @@ Cuatro directos a máxima calidad pueden exceder la memoria o capacidad de decod
 
 Consulta [PRIVACY.md](PRIVACY.md), [AUTHORS.md](AUTHORS.md) y [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). El identificador público del cliente OAuth de Twitch no es una contraseña; los tokens personales se generan al conectar cada cuenta y no se incluyen en este repositorio.
 
-Copyright © 2026 DanikDeJesus. La publicación del código no concede por sí sola una licencia de reutilización; todavía no se ha elegido una licencia para el código original. Las dependencias conservan sus propias licencias.
+Copyright © 2026 errorx0x. La publicación del código no concede por sí sola una licencia de reutilización; todavía no se ha elegido una licencia para el código original. Las dependencias conservan sus propias licencias.
