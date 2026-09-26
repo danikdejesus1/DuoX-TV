@@ -41,7 +41,7 @@ T = {
            ("NVIDIA Shield y similares", "Requiere Android TV 9 o posterior. La calidad y el número de vídeos simultáneos dependen del hardware; no se ha probado cada modelo.")],
   ih="Instálala en un minuto",
   isteps=[("Instala Downloader", "Desde la Appstore de tu Fire TV, busca «Downloader» e instálalo. Actívale el permiso de «apps desconocidas»."),
-          ("Escribe el código", "Ábrelo, escribe el código 9565357 en la casilla de arriba y pulsa Ir."),
+          ("Escribe el código", "Ábrelo, escribe el código 7658893 en la casilla de arriba y pulsa Ir."),
           ("Instala y disfruta", "Acepta la instalación. Desde dentro, el icono ↻ avisa de nuevas versiones y las descarga.")],
   copy="Copiar", copied="Copiado",
   fq=[
@@ -93,7 +93,7 @@ T = {
            ("NVIDIA Shield and similar", "Requires Android TV 9 or later. Video quality and simultaneous streams depend on the hardware; not every model has been tested.")],
   ih="Install it in a minute",
   isteps=[("Get Downloader", "Search “Downloader” in your Fire TV Appstore and install it. Allow it to install unknown apps."),
-          ("Enter the code", "Open it, type the code 9565357 in the box at the top and press Go."),
+          ("Enter the code", "Open it, type the code 7658893 in the box at the top and press Go."),
           ("Install and enjoy", "Accept the install. Inside the app, the ↻ icon checks for new versions and downloads them.")],
   copy="Copy", copied="Copied",
   fq=[
@@ -227,6 +227,8 @@ h2{font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.035em;font
 .code{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:#050c10;border:1px solid var(--line);border-radius:16px;padding:14px 14px 14px 22px}
 .code label{width:100%;font-size:13px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 .code code{flex:1;min-width:0;font:500 15px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mint);overflow-wrap:anywhere}
+/* the Downloader code is the fastest install path on a TV remote, so it gets its own glow instead of blending into the plain-URL box below it */
+.code.hi{border-color:rgba(163,244,207,.45);background:linear-gradient(180deg,rgba(163,244,207,.09),rgba(163,244,207,.02) 65%),#050c10;box-shadow:0 0 0 1px rgba(163,244,207,.12) inset,0 20px 50px -25px rgba(163,244,207,.5)}
 /* faq */
 .faq{max-width:820px}
 details{border-bottom:1px solid var(--line);padding:6px 0}summary{list-style:none;cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-.01em;padding:18px 34px 18px 0;position:relative}
@@ -310,7 +312,7 @@ footer p{max-width:70ch;margin:22px 0 0;font-size:13px;opacity:.85}
 <section id="{{iid}}" style="padding-top:40px"><div class="wrap">
  <div class="sec-h reveal"><h2>{{ih}}</h2></div>
  <div class="cards">{{isteps}}</div>
- <div class="code reveal"><label>{{dl_code_label}}</label><code style="display:block;width:100%;flex:none;overflow-wrap:normal;font-size:34px;font-weight:800;letter-spacing:.06em">9565357</code><span style="display:block;width:100%;color:var(--muted);font-size:14px">{{dl_code_hint}}</span></div>
+ <div class="code hi reveal"><label>{{dl_code_label}}</label><code style="display:block;width:100%;flex:none;overflow-wrap:normal;font-size:34px;font-weight:800;letter-spacing:.06em">7658893</code><span style="display:block;width:100%;color:var(--muted);font-size:14px">{{dl_code_hint}}</span></div>
  <div class="code reveal"><label>{{install_h_code}}</label><code id="url">{{apk}}</code><button class="btn g s" id="copy" data-ok="{{copied}}">{{copy}}</button></div>
 </div></section>
 
