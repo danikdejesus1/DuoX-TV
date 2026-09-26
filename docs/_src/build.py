@@ -3,7 +3,7 @@
 import html, json, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://errorx0x.github.io/DuoX-TV/"
+SITE = "https://duox.errorx0x.com/"
 REPO = "https://github.com/errorx0x/DuoX-TV"
 APK = REPO + "/releases/latest/download/DuoX.apk"
 
