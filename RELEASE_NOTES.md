@@ -1,3 +1,8 @@
+# DuoX TV 3.2.2
+
+- **Corregido: Atrás en el reproductor cerraba la app.** En vez de volver al Home, el botón Atrás a veces cerraba DuoX por completo. Ya vuelve al Home de forma confiable, sin importar si vienes de un directo o de un VOD.
+- El botón de silenciar la vista previa del Home vuelve a estar junto a "Ver directo", no sobre el video.
+
 # DuoX TV 3.2.1
 
 - **Si un directo termina, ya no se queda congelada la pantalla:** DuoX vuelve al Home automáticamente en vez de dejarte viendo el último frame o una pantalla negra.

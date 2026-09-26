@@ -6,13 +6,13 @@
 
 ![DuoX TV: multivista con cuatro directos](docs/img/multiview.jpg)
 
-## Nuevo en 3.2.1
+## Nuevo en 3.2.2
 
-**Si un directo termina, DuoX vuelve al Home solo** en vez de dejarte con la pantalla congelada, y un aviso discreto pregunta si sigues ahí tras 10 minutos de inactividad en el Home. El panel de canales en vivo también se actualiza más rápido (cada 20 s) y sin parpadeos. Kick sigue conectándose por QR desde el móvil, sin escribir la contraseña con el mando.
+**Se corrigió que el botón Atrás cerrara la app en vez de volver al Home** al ver un directo o un VOD. También el botón de silenciar la vista previa del Home vuelve a estar junto a "Ver directo".
 
-[Ver todas las novedades de 3.2.1](https://github.com/errorx0x/DuoX-TV/releases/tag/v3.2.1)
+[Ver todas las novedades de 3.2.2](https://github.com/errorx0x/DuoX-TV/releases/tag/v3.2.2)
 
-**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.1 returns to Home automatically when a live stream you're watching ends, adds an idle prompt after 10 minutes of inactivity on Home, and makes the live-channels panel refresh faster and flicker-free. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
+**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.2 fixes Back closing the app instead of returning to Home while watching a live stream or VOD. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
 
 **Creado por errorx0x.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
 
