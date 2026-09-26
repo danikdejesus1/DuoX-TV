@@ -1,6 +1,6 @@
 # DuoX TV
 
-> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by DanikDeJesus. Not affiliated with Twitch, Kick or Amazon.
+> DuoX TV is a free, independent Android/Fire TV app to watch Twitch and Kick live streams and VODs with a TV remote. It offers multiview of up to four channels (Twitch and Kick mixed), voice-synced VODs, voice search, QR chat and in-app updates. Created by errorx0x. Not affiliated with Twitch, Kick or Amazon.
 
 DuoX TV (also written DuoX) is an alternative Twitch and Kick client for Amazon Fire TV Stick, Fire TV Cube and Android TV 9+. APK size is about 1.5 MB. Package: tv.duox.tv.
 
@@ -12,11 +12,11 @@ DuoX TV (also written DuoX) is an alternative Twitch and Kick client for Amazon 
 - Price: free.
 
 ## Links
-- [Website (Español)](https://danikdejesus1.github.io/DuoX-TV/): overview, install guide and FAQ
-- [Website (English)](https://danikdejesus1.github.io/DuoX-TV/en/): overview, install guide and FAQ
-- [Download latest APK](https://github.com/danikdejesus1/DuoX-TV/releases/latest/download/DuoX.apk)
-- [Source code and releases](https://github.com/danikdejesus1/DuoX-TV)
-- [Privacy](https://github.com/danikdejesus1/DuoX-TV/blob/main/PRIVACY.md)
+- [Website (Español)](https://errorx0x.github.io/DuoX-TV/): overview, install guide and FAQ
+- [Website (English)](https://errorx0x.github.io/DuoX-TV/en/): overview, install guide and FAQ
+- [Download latest APK](https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk)
+- [Source code and releases](https://github.com/errorx0x/DuoX-TV)
+- [Privacy](https://github.com/errorx0x/DuoX-TV/blob/main/PRIVACY.md)
 
 ## Resumen en español
 DuoX TV es una app gratuita para Fire TV y Android TV para ver Twitch y Kick con el mando: multivista de hasta 4 canales, VOD sincronizados, búsqueda por voz y chat con QR.

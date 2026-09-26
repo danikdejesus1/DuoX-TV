@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://danikdejesus1.github.io/DuoX-TV/sitemap.xml
+Sitemap: https://errorx0x.github.io/DuoX-TV/sitemap.xml
