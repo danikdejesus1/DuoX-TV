@@ -8,17 +8,17 @@
 
 ## Nuevo en 3.2.3
 
-**Se corrigió el botón ↻ Actualización:** encontraba la versión nueva pero no dejaba descargarla. Si ya tienes 3.2.1 o 3.2.2, esta última hay que instalarla una vez a mano (Downloader, código **9565357**); después de esta, el botón de actualizar vuelve a funcionar normal.
+**Se corrigió el botón ↻ Actualización:** encontraba la versión nueva pero no dejaba descargarla. Si ya tienes 3.2.1 o 3.2.2, esta última hay que instalarla una vez a mano (Downloader, código **7658893**); después de esta, el botón de actualizar vuelve a funcionar normal.
 
 [Ver todas las novedades de 3.2.3](https://github.com/errorx0x/DuoX-TV/releases/tag/v3.2.3)
 
-**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.3 fixes the in-app ↻ Update button, which detected new releases but failed to download them. If you're on 3.2.1 or 3.2.2, install this one manually once (Downloader, code 9565357); after that, in-app updates work normally again. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
+**English:** DuoX TV is a free, independent Twitch and Kick client for Amazon Fire TV and Android TV (Fire OS 7+ / Android 9+). Version 3.2.3 fixes the in-app ↻ Update button, which detected new releases but failed to download them. If you're on 3.2.1 or 3.2.2, install this one manually once (Downloader, code 7658893); after that, in-app updates work normally again. It offers multiview of up to four channels, voice-synced VODs, voice search, QR chat and in-app updates, in a ~1.5 MB APK. Not affiliated with Twitch, Kick or Amazon.
 
 **Creado por errorx0x.** Cliente independiente para ver Twitch y Kick en Fire TV y Android TV, con navegación mediante mando.
 
 ## Descargar e instalar
 
-El APK se publica en [Releases](https://github.com/errorx0x/DuoX-TV/releases). En Downloader basta con escribir el código **9565357**, o introducir el enlace directo:
+El APK se publica en [Releases](https://github.com/errorx0x/DuoX-TV/releases). En Downloader basta con escribir el código **7658893**, o introducir el enlace directo:
 
 `https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`
 

@@ -1,7 +1,7 @@
 # DuoX TV 3.2.3
 
 - **Corregido: el botón ↻ Actualización encontraba la nueva versión pero no la dejaba descargar** ("La publicación todavía no tiene un APK compatible"). Era una comparación de mayúsculas/minúsculas en la ruta del repositorio de GitHub que no coincidía tras el cambio de cuenta. Verificado con una descarga e instalación real completa.
-- **Nota para quien ya tiene 3.2.1 o 3.2.2 instalada:** por este mismo motivo, esta es la única versión que hace falta instalar manualmente una vez (Downloader, código 9565357). Después de esta, el botón de actualizar vuelve a funcionar normal.
+- **Nota para quien ya tiene 3.2.1 o 3.2.2 instalada:** por este mismo motivo, esta es la única versión que hace falta instalar manualmente una vez (Downloader, código 7658893). Después de esta, el botón de actualizar vuelve a funcionar normal.
 
 # DuoX TV 3.2.2
 
@@ -39,7 +39,7 @@ Sin escribir tu contraseña con el mando, sin navegador de inicio de sesión en 
 ## Instalar o actualizar
 
 - Si ya usas DuoX TV, pulsa **↻ Actualización** o instala `DuoX.apk` encima de tu versión actual.
-- En Downloader: **9565357** o `https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`.
+- En Downloader: **7658893** o `https://github.com/errorx0x/DuoX-TV/releases/latest/download/DuoX.apk`.
 - Fire OS 7 / Android TV 9 o posterior. APK firmado con el mismo certificado que las versiones anteriores.
 
 La vinculación y la carga de seguidos de Kick se han comprobado en un Fire TV real. DuoX TV es independiente, no oficial ni afiliada a Twitch, Kick o Amazon; la compatibilidad con los servicios puede cambiar.
